@@ -1,0 +1,23 @@
+{
+  "name": "proyecto",
+  "scripts": {
+  },
+  "env": {
+    "PORT": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/java"
+    }
+  ]
+}
