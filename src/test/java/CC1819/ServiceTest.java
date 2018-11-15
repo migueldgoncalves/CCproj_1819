@@ -14,7 +14,7 @@ import io.javalin.Javalin;
 
 import java.net.*;
 
-public class ServiceTests {
+public class ServiceTest {
 	
 	Javalin app = null;
 	
@@ -44,12 +44,12 @@ public class ServiceTests {
 	public void usuarioPathTest() {
 		try {
 			OkHttpClient client = new OkHttpClient();
-			Request request = new Request.Builder().url(URL+"/usuarios").build();
+			Request request = new Request.Builder().url(URL+"/viajes").build();
 			Response response = client.newCall(request).execute();
 			String stringResponse = response.body().string(); //response.body().string() can only be called once
-			assertTrue(stringResponse.contains("fernando"));
-			assertTrue(stringResponse.contains("luis"));
-			assertTrue(stringResponse.contains("gabriel"));
+			assertTrue(stringResponse.contains("Almeria"));
+			assertTrue(stringResponse.contains("Madrid"));
+			assertTrue(stringResponse.contains("Barcelona"));
 		}
 		catch (Exception e) {
 			System.out.println("An exception ocurred");
