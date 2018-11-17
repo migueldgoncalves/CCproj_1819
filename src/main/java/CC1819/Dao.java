@@ -1,69 +1,83 @@
 package CC1819;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import java.time.LocalTime;
 
 public class Dao {
 	
 	private static Dao dao = null;
 	
-	private List<DataObject> viajes = new ArrayList<>();
+	private ArrayList<DataObject> viajes = new ArrayList<>();
+	private ArrayList<String> noticias = new ArrayList<>();
 	
-	private static AtomicInteger ultimoId = new AtomicInteger(0);
+	private Dao() {
+		
+	}
 	
-	public Dao() {
-	
+	private void setDao() {
+		
+		viajes.add(new DataObject("Granada", "Almeria", "21h50", "22h30", 20));
+		viajes.add(new DataObject("Granada", "Madrid", "08h00", "13h30", 50));
+		viajes.add(new DataObject("Granada", "Barcelona", "00h00", "12h00", 100));
+		
+		noticias.add("1.000 dias sin tren de Granada a Madrid");
+		noticias.add("Habra Talgo de Granada a Madrid");
+		noticias.add("Podra haber Tren Hotel de Granada a Barcelona?");
+
 	}
 	
 	public static Dao getDao() {
 		
-		if(dao!=null)
-			return dao;
+		if(Dao.dao!=null)
+			return Dao.dao;
 		
-		dao=new Dao();
-	
-		dao.viajes.add(new DataObject("Granada", "Almeria", LocalTime.of(21, 50), LocalTime.of(22, 30), 20, ultimoId.incrementAndGet()));
-		dao.viajes.add(new DataObject("Granada", "Madrid", LocalTime.of(8, 00), LocalTime.of(13, 30), 50, ultimoId.incrementAndGet()));
-		dao.viajes.add(new DataObject("Granada", "Barcelona", LocalTime.of(00, 00), LocalTime.of(12, 00), 100, ultimoId.incrementAndGet()));
+		Dao.dao=new Dao();
 		
-		return dao;
+		Dao.dao.setDao();
+		
+		return Dao.dao;
 			
 	}
 	
-	public void post(String origen, String destino, LocalTime partida, LocalTime llegada, double precio) {
-		int id = Dao.ultimoId.incrementAndGet();
-		this.viajes.add(new DataObject(origen, destino, partida, llegada, precio, id));
+	public void postViaje(String origen, String destino, String partida, String llegada, double precio) {
+		this.viajes.add(new DataObject(origen, destino, partida, llegada, precio));
 	}
 	
-	public DataObject findById(int id) {
-		for(int i=0; i<viajes.size(); i++)
-			if (viajes.get(i).getId()==id)
-				return viajes.get(i);
+	public void postNoticia(String texto) {
+		this.noticias.add(texto);
+	}
+	
+	public DataObject findViajeById(int id) {
+		if (0<=id-1 && id-1<viajes.size())
+			return this.viajes.get(id-1);
 		return null;
 	}
 	
-	public List<DataObject> getAllViajes() {
+	public String findNoticiaById(int id) {
+		if (0<=id-1 && id-1<noticias.size())
+			return this.noticias.get(id-1);
+		return null;
+	}
+	
+	public ArrayList<DataObject> getAllViajes() {
 		return viajes;
 	}
 	
-	public void update(String origen, String destino, LocalTime partida, LocalTime llegada, double precio, int id) {
-		DataObject searchedObject = findById(id);
-		if(searchedObject!=null) {
-			searchedObject.setOrigen(origen);
-			searchedObject.setDestino(destino);
-			searchedObject.setPartida(partida);
-			searchedObject.setLlegada(llegada);
-			searchedObject.setPrecio(precio);
-		}
+	public ArrayList<String> getAllNoticias() {
+		return noticias;
 	}
 	
-	public void delete(int id) {
-		for(int i=0; i<viajes.size(); i++)
-			if (viajes.get(i).getId()==id)
-				viajes.remove(i);
+	public void deleteViaje(int id) {
+		if (0<=id-1 && id-1<viajes.size())
+			this.viajes.set(id-1, null);
+	}
+	
+	public void deleteNoticia(int id) {
+		if (0<=id-1 && id-1<noticias.size())
+			this.noticias.set(id-1, null);		
+	}
+	
+	public static void cleanDao() {
+		Dao.dao = null;
 	}
 	
 }

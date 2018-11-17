@@ -1,23 +1,23 @@
 package CC1819;
 
-import java.time.LocalTime;
-
 public class DataObject {
 	
 	String origen = null;
 	String destino = null;
-	LocalTime partida = LocalTime.of(0, 0);
-	LocalTime llegada = LocalTime.of(0, 0);
+	String partida = null;
+	String llegada = null;
 	double precio = 0;
-	int id = 0;
 	
-	public DataObject(String origen, String destino, LocalTime partida, LocalTime llegada, double precio, int id) {
+	public DataObject(){
+		
+	}
+	
+	public DataObject(String origen, String destino, String partida, String llegada, double precio) {
 		this.origen=origen;
 		this.destino=destino;
 		this.partida=partida;
 		this.llegada=llegada;
 		this.precio=precio;
-		this.id=id;
 	}
 	
 	public void setOrigen(String origen) {
@@ -28,20 +28,16 @@ public class DataObject {
 		this.destino = destino;
 	}
 	
-	public void setPartida(LocalTime partida) {
+	public void setPartida(String partida) {
 		this.partida = partida;
 	}
 	
-	public void setLlegada(LocalTime llegada) {
+	public void setLlegada(String llegada) {
 		this.llegada = llegada;
 	}
 
 	public void setPrecio(double precio) {
 		this.precio = precio;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getOrigen() {
@@ -52,20 +48,16 @@ public class DataObject {
 		return this.destino;
 	}
 	
-	public LocalTime getPartida() {
+	public String getPartida() {
 		return this.partida;
 	}
 	
-	public LocalTime getLlegada() {
+	public String getLlegada() {
 		return this.llegada;
 	}
 	
 	public double getPrecio() {
 		return this.precio;
-	}
-	
-	public int getId() {
-		return this.id;
 	}
 
 }

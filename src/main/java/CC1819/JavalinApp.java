@@ -1,5 +1,7 @@
 package CC1819;
 
+import java.util.HashMap;
+
 import io.javalin.Javalin;
 
 public class JavalinApp {
@@ -27,31 +29,45 @@ public class JavalinApp {
 			ctx.result("not found");
 		});
 		
-		app.get("/", ctx -> ctx.result("Hello World"));
+		HashMap hash = new HashMap();
+		hash.put("status", "OK");
+		app.get("/", ctx -> ctx.json(hash));
 		
 		app.get("/viajes", ctx -> {
 			ctx.json(dao.getAllViajes());
 		});
 		
-		app.get("viajes/:viaje-id", ctx -> {
-			ctx.json(dao.findById(Integer.parseInt(ctx.pathParam("viaje-id"))));
+		app.get("/noticias", ctx -> {
+			ctx.json(dao.getAllNoticias());
 		});
 		
+		app.get("viajes/:viaje-id", ctx -> {
+			ctx.json(dao.findViajeById(Integer.parseInt(ctx.pathParam("viaje-id"))));
+		});
+		
+		app.get("noticias/:noticia-id", ctx -> {
+			ctx.json(dao.findNoticiaById(Integer.parseInt(ctx.pathParam("noticia-id"))));
+		});
 		
 		app.post("/viajes", ctx -> {
 			DataObject viaje = ctx.bodyAsClass(DataObject.class);
-			dao.post(viaje.origen, viaje.destino, viaje.partida, viaje.llegada, viaje.precio);
+			dao.postViaje(viaje.origen, viaje.destino, viaje.partida, viaje.llegada, viaje.precio);
 			ctx.status(201);
 		});
 		
-		app.patch("viajes/:viaje-id", ctx -> {
-			DataObject viaje = ctx.bodyAsClass(DataObject.class);
-			dao.update(viaje.origen, viaje.destino, viaje.partida, viaje.llegada, viaje.precio, Integer.parseInt(ctx.pathParam("viaje-id")));
-			ctx.status(204);
+		app.post("/noticias", ctx -> {
+			String noticia = ctx.bodyAsClass(String.class);
+			dao.postNoticia(noticia);
+			ctx.status(201);
 		});
 		
 		app.delete("/viajes/:viaje-id", ctx -> {
-			dao.delete(Integer.parseInt(ctx.pathParam("viaje-id")));
+			dao.deleteViaje(Integer.parseInt(ctx.pathParam("viaje-id")));
+			ctx.status(204);
+		});
+		
+		app.delete("/noticias/:noticia-id", ctx -> {
+			dao.deleteNoticia(Integer.parseInt(ctx.pathParam("noticia-id")));
 			ctx.status(204);
 		});
 		
