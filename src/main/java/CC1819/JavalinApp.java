@@ -23,13 +23,15 @@ public class JavalinApp {
 		
 		app.exception(Exception.class, (e, ctx) -> {
 			e.printStackTrace();
+			ctx.status(400);
+			ctx.result("Pedido invalido");
 		});
 		
 		app.error(404, ctx -> {
-			ctx.result("not found");
+			ctx.result("Pagina no existente");
 		});
 		
-		HashMap hash = new HashMap();
+		HashMap<String, String> hash = new HashMap<String, String>();
 		hash.put("status", "OK");
 		app.get("/", ctx -> ctx.json(hash));
 		

@@ -15,9 +15,9 @@ public class Dao {
 	
 	private void setDao() {
 		
-		viajes.add(new DataObject("Granada", "Almeria", "21h50", "22h30", 20));
-		viajes.add(new DataObject("Granada", "Madrid", "08h00", "13h30", 50));
-		viajes.add(new DataObject("Granada", "Barcelona", "00h00", "12h00", 100));
+		viajes.add(new DataObject("Granada", "Maracena", "08h04", "08h10", 1.50));
+		viajes.add(new DataObject("Granada", "Armilla", "09h16", "09h26", 1.50));
+		viajes.add(new DataObject("Granada", "Huetor Vega", "17h28", "17h40", 1.65));
 		
 		noticias.add("1.000 dias sin tren de Granada a Madrid");
 		noticias.add("Habra Talgo de Granada a Madrid");

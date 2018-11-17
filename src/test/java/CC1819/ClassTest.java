@@ -27,8 +27,8 @@ public class ClassTest {
 		DataObject viaje4 = dao.findViajeById(4);
 		Assert.assertNull(viaje0);
 		Assert.assertTrue(viaje1.origen=="Granada");
-		Assert.assertTrue(viaje2.destino=="Madrid");
-		Assert.assertTrue(viaje3.precio==100);
+		Assert.assertTrue(viaje2.destino=="Armilla");
+		Assert.assertTrue(viaje3.precio==1.65);
 		Assert.assertNull(viaje4);
 		
 		String noticia0 = dao.findNoticiaById(0);
@@ -54,8 +54,8 @@ public class ClassTest {
 		viaje4 = dao.findViajeById(4);
 		Assert.assertNull(viaje0);
 		Assert.assertTrue(viaje1.origen=="Granada");
-		Assert.assertTrue(viaje2.destino=="Madrid");
-		Assert.assertTrue(viaje3.precio==100);
+		Assert.assertTrue(viaje2.destino=="Armilla");
+		Assert.assertTrue(viaje3.precio==1.65);
 		Assert.assertNull(viaje4);
 		
 		noticia0 = dao.findNoticiaById(0);
@@ -72,9 +72,9 @@ public class ClassTest {
 	
 	@Test
 	public void postViajeTest() {
-		dao.postViaje("Lisboa", "Granada", "12h00", "21h00", 200.0);
+		dao.postViaje("Albolote", "Granada", "07h40", "07h52", 1.65);
 		DataObject viaje = dao.findViajeById(4);
-		Assert.assertTrue(viaje.getOrigen()=="Lisboa");
+		Assert.assertTrue(viaje.getOrigen()=="Albolote");
 	}
 	
 	@Test
@@ -98,7 +98,7 @@ public class ClassTest {
 	public void getAllViajesTest() {
 		ArrayList<DataObject> viajes = dao.getAllViajes();
 		Assert.assertTrue(viajes.size()==3);
-		dao.postViaje("Lisboa", "Granada", "12h00", "21h00", 200.0);
+		dao.postViaje("Albolote", "Granada", "07h40", "07h52", 1.65);
 		Assert.assertTrue(viajes.size()==4);
 		dao.deleteViaje(4);
 		Assert.assertTrue(viajes.size()==4);//Deleting does not remove index, sets value to null
