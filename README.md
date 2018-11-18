@@ -14,6 +14,10 @@ En su estado actual, habendose concluyendo el [Hito 2](https://github.com/miguel
 
 Este proyecto siguirá siendo desarrollado hasta Enero, cuando se prevé su conclusión.
 
+Despliegue https://javalinapp.herokuapp.com/
+
+[Enlace](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/despliegue.md) a la configuración del despliegue.
+
 ## Configuración
 
 Heroku, el PaaS elegido para este hito del proyecto, necesita 2 ficheros de configuración para el despliegue del código que esté en un repositório GitHub, el app.json y el Procfile.
@@ -68,12 +72,6 @@ La ruta raiz de la aplicación retorna el JSON `{"status":"OK"}`. Llamadas a la 
 La aplicación tiene también las rutas `/viajes/2` y `/viajes/3`, que retornan un JSON similar. La ruta `/viajes` retorna un JSON conteniendo esos 3 JSONs.
 
 Existen también las rutas `/noticias/1`, `/noticias/2` y `/noticias/3`, que retornan cada uno un JSON con una string. La ruta `/noticias` retorna un JSON con esas 3 strings.
-
-## Despliegue
-
-Despliegue https://javalinapp.herokuapp.com/
-
-[Enlace](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/despliegue.md) a la configuración del despliegue.
 
 ## Elección del PaaS
 
