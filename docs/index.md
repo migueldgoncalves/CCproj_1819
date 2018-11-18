@@ -20,7 +20,7 @@ Está distribuido con la licencia MIT.
 
 <img src="Diagrama.png" alt="https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Diagrama.png">
 
-La aplicación será desarrollada usando la arquitectura basada em microservicios. Esta arquitectura tiene grande popularidad hoy en día, una vez que comparativamente a la arquitectura monolítica trae un aumento en la eficiencia; una mayor facilidad de escalabilidad y de actualización de cada microservicio en separado; así como la posibilidad de usar más que un lenguaje o framework en la aplicación.
+La aplicación está siendo desarrollada usando la arquitectura basada em microservicios. Esta arquitectura tiene grande popularidad hoy en día, una vez que comparativamente a la arquitectura monolítica trae un aumento en la eficiencia; una mayor facilidad de escalabilidad y de actualización de cada microservicio en separado; así como la posibilidad de usar más que un lenguaje o framework en la aplicación.
 
 Tendrá 4 microservicios principales: Información al Cliente; Gestión de Viajes; Autenticación; y Gestión de Equipos. Casi todos serán desarrollados usando el lenguaje Java y el microframework Javalin, e tendrán una base de datos MongoDB. La excepción será el microservicio de Gestión de Equipos, lo cual será desarrollado usando el lenguaje Ruby y el microframework Sinatra, además contará con una base de datos Neo4J una vez que tendrá datos en grafos.
 
@@ -30,9 +30,13 @@ Los 4 microservicios principales contarán con una REST API. Recibirán y respon
 
 Los microservicios de Información al Cliente, Gestión de Viajes y Gestión de Equipos escribirán y leerán mensajes del broker.
 
+Al terminar el Hito 2, se encuentra implementado el microservicio de Información al Cliente, que de momento permite la escrita, lectura y remoción directa de viajes y noticias almacenadas en arrays. No se ha implementado su conexión a la base de datos MongoDB.
+
 ### 2.1-Información al Cliente
 
 Permitirá a clientes acceder a horarios de trenes, precios de viajes y noticias de ámbito ferroviário. Empleados con los permisos adecuados podrán editar dicha información. Cambios en horarios y precios serán comunicados via HTTP con el microservicio de Gestión de Viajes con el fin de mantener la consistencia; dichos cambios podrán ser recusados por el microservicio, lo que llevará a su cancelamiento.
+
+Su funcionalidad básica se ha implementado en el Hito 2.
 
 ### 2.2-Autenticación
 
