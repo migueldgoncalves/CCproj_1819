@@ -110,24 +110,6 @@ public class ServiceTest {
 			//Verificar la idempotencia del metodo
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			stringJson = "[{\"origen\":\"Granada\","
-	                + "\"destino\":\"Maracena\","
-	                + "\"partida\":\"08h04\","
-	                + "\"llegada\":\"08h10\","
-	                + "\"precio\":1.5"
-	                + "},"
-	    			+ "{\"origen\":\"Granada\","
-	    	        + "\"destino\":\"Armilla\","
-	    	        + "\"partida\":\"09h16\","
-	    	        + "\"llegada\":\"09h26\","
-	    	        + "\"precio\":1.5"
-	    	        + "},"
-	    			+ "{\"origen\":\"Granada\","
-	    	        + "\"destino\":\"Huetor Vega\","
-	    	        + "\"partida\":\"17h28\","
-	    	        + "\"llegada\":\"17h40\","
-	    	        + "\"precio\":1.65"
-	    	        + "}]";
 			stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 			assertEquals(OK, response.code());
@@ -148,17 +130,13 @@ public class ServiceTest {
 	                + "\"Habra Talgo de Granada a Madrid\","
 	                + "\"Podra haber Tren Hotel de Granada a Barcelona?\""
 	    	        + "]";
-			String stringResponse = response.body().string(); //response.body().string() can only be called once
+			String stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 			assertEquals(OK, response.code());
 			
 			//Verificar la idempotencia del metodo
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			stringJson = "[\"1.000 dias sin tren de Granada a Madrid\","
-	                + "\"Habra Talgo de Granada a Madrid\","
-	                + "\"Podra haber Tren Hotel de Granada a Barcelona?\""
-	    	        + "]";
 			stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 			assertEquals(OK, response.code());
@@ -181,20 +159,14 @@ public class ServiceTest {
 	                + "\"llegada\":\"08h10\","
 	                + "\"precio\":1.5"
 	                + "}";
-			String stringResponse = response.body().string(); //response.body().string() can only be called once
+			String stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 			assertEquals(OK, response.code());
 			
 			//Verificar la idempotencia del metodo
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			stringJson = "{\"origen\":\"Granada\","
-	                + "\"destino\":\"Maracena\","
-	                + "\"partida\":\"08h04\","
-	                + "\"llegada\":\"08h10\","
-	                + "\"precio\":1.5"
-	                + "}";
-			stringResponse = response.body().string(); //response.body().string() can only be called once
+			stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 			assertEquals(OK, response.code());
 		}
@@ -211,16 +183,14 @@ public class ServiceTest {
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			String stringJson = "\"Habra Talgo de Granada a Madrid\"";
-			String stringResponse = response.body().string(); //response.body().string() can only be called once
+			String stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 			assertEquals(OK, response.code());
 			
 			//Verificar la idempotencia del metodo
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/2";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			stringJson = "\"Habra Talgo de Granada a Madrid\"";
-			stringResponse = response.body().string(); //response.body().string() can only be called once
+			stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 			assertEquals(OK, response.code());
 		}
@@ -236,14 +206,14 @@ public class ServiceTest {
 			String URL = URL_TEMPLATE+port+URL_VIAJES+"/0";
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
-			String stringResponse = response.body().string(); //response.body().string() can only be called once
+			String stringResponse = response.body().string();
 			assertEquals("Pedido invalido", stringResponse);
 			assertEquals(BAD_REQUEST, response.code());
 			
 			URL = URL_TEMPLATE+port+URL_VIAJES+"/4";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			stringResponse = response.body().string(); //response.body().string() can only be called once
+			stringResponse = response.body().string();
 			assertEquals("Pedido invalido", stringResponse);
 			assertEquals(BAD_REQUEST, response.code());
 		}
@@ -259,14 +229,14 @@ public class ServiceTest {
 			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/0";
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
-			String stringResponse = response.body().string(); //response.body().string() can only be called once
+			String stringResponse = response.body().string();
 			assertEquals("Pedido invalido", stringResponse);
 			assertEquals(BAD_REQUEST, response.code());
 			
 			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/4";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			stringResponse = response.body().string(); //response.body().string() can only be called once
+			stringResponse = response.body().string();
 			assertEquals("Pedido invalido", stringResponse);
 			assertEquals(BAD_REQUEST, response.code());
 		}
@@ -293,12 +263,12 @@ public class ServiceTest {
 			
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			String stringResponse = response.body().string(); //response.body().string() can only be called once
+			String stringResponse = response.body().string();
 			assertTrue(stringResponse.contains(stringJson));
 			
 			request = new Request.Builder().url(URL+"/4").build();
 			response = client.newCall(request).execute();
-			stringResponse = response.body().string(); //response.body().string() can only be called once
+			stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 		}
 		catch (Exception e) {
@@ -319,12 +289,12 @@ public class ServiceTest {
 			
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			String stringResponse = response.body().string(); //response.body().string() can only be called once
+			String stringResponse = response.body().string();
 			assertTrue(stringResponse.contains(stringJson));
 			
 			request = new Request.Builder().url(URL+"/4").build();
 			response = client.newCall(request).execute();
-			stringResponse = response.body().string(); //response.body().string() can only be called once
+			stringResponse = response.body().string();
 			assertEquals(stringJson, stringResponse);
 		}
 		catch (Exception e) {
@@ -381,6 +351,16 @@ public class ServiceTest {
 			assertEquals("Pedido invalido", response.body().string());
 			assertEquals(BAD_REQUEST, response.code());
 			
+			//Verificar la idempotencia del metodo
+			request = new Request.Builder().url(URL).delete().build();
+			response = client.newCall(request).execute();
+			assertEquals(NO_CONTENT, response.code());
+			
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			assertEquals("Pedido invalido", response.body().string());
+			assertEquals(BAD_REQUEST, response.code());
+			
 			URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
@@ -403,6 +383,16 @@ public class ServiceTest {
 			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/2";
 			Request request = new Request.Builder().url(URL).delete().build();
 			Response response = client.newCall(request).execute();
+			assertEquals(NO_CONTENT, response.code());
+			
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			assertEquals("Pedido invalido", response.body().string());
+			assertEquals(BAD_REQUEST, response.code());
+			
+			//Verificar la idempotencia del metodo
+			request = new Request.Builder().url(URL).delete().build();
+			response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
 			
 			request = new Request.Builder().url(URL).build();
@@ -438,6 +428,16 @@ public class ServiceTest {
 			request = new Request.Builder().url(URL).delete().build();
 			response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
+			
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			assertTrue(response.body().string().contains("Maracena"));
+			
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/3";
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			assertTrue(response.body().string().contains("Huetor Vega"));
 		}
 		catch (Exception e) {
 			System.out.println("Una excepcion ha ocurrido");
@@ -457,6 +457,16 @@ public class ServiceTest {
 			request = new Request.Builder().url(URL).delete().build();
 			response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
+			
+			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/1";
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			assertEquals("\"1.000 dias sin tren de Granada a Madrid\"", response.body().string());
+			
+			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/3";
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			assertEquals("\"Podra haber Tren Hotel de Granada a Barcelona?\"", response.body().string());
 		}
 		catch (Exception e) {
 			System.out.println("Una excepcion ha ocurrido");

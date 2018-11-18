@@ -75,6 +75,10 @@ public class ClassTest {
 		dao.postViaje("Albolote", "Granada", "07h40", "07h52", 1.65);
 		DataObject viaje = dao.findViajeById(4);
 		Assert.assertTrue(viaje.getOrigen()=="Albolote");
+		Assert.assertTrue(viaje.getDestino()=="Granada");
+		Assert.assertTrue(viaje.getPartida()=="07h40");
+		Assert.assertTrue(viaje.getLlegada()=="07h52");
+		Assert.assertTrue(viaje.getPrecio()==1.65);
 	}
 	
 	@Test
