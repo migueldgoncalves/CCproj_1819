@@ -69,10 +69,17 @@ El único de los 4 microservicios sin acceso por parte de los clientes. Empleado
 ## 4-Enlaces de interés relacionados con los hitos anteriores
 
 [Configuración del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_configuracion.md)
+
 [Elección del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_eleccion.md)
+
 [Creación de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/creacion_aplicacion.md)
+
 [Configuración del despliegue](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/despliegue_PaaS.md)
+
 [Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md)
+
 [Hitos del proyecto](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/hitos.md)
+
 [Motivo de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/motivo.md)
+
 [Rutas](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/rutas.md)
