@@ -6,7 +6,8 @@ El microservicio actualmente en desarrollo, el de Información al Cliente, está
 
 ## Playbook
 
-```---
+```
+---
 - hosts: azure
   become: yes
   tasks:
@@ -76,7 +77,8 @@ Ansible permite especificar las configuraciones y estados a obtener en las máqu
 
 ### Instalación del Java 8, Git y Maven
 
-```- name: Install Java 8
+```
+- name: Install Java 8
   apt:
    name: default-jdk
    state: present
@@ -96,7 +98,8 @@ Las primeras tareas del playbook instalam respectivamente el Java 8 (mientras no
 
 ### Instalación y arranque del MongoDB
 
-```- name: Add MongoDB public GPG key
+```
+- name: Add MongoDB public GPG key
   apt_key:
    keyserver: hkp://keyserver.ubuntu.com:80
    id: 9DA31620334BD75D9DCB49F368818C72E52529D4
@@ -132,7 +135,8 @@ La utilización de MongoDB requier que su servicio sea iniciado previamente; la 
 
 ### Despliegue de la aplicación
 
-```- name: Clone Git project repository
+```
+- name: Clone Git project repository
   git:
    dest: Documents/CC1819
    repo: 'https://github.com/migueldgoncalves/CCproj_1819.git'
