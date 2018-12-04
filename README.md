@@ -62,103 +62,17 @@ Permitirá a clientes comprar viajes y gestionar reservas, por ejemplo cambiando
 
 El único de los 4 microservicios sin acceso por parte de los clientes. Empleados con los permisos adecuados podrán gestionar y monitorizar equipos ferroviários en parte o toda la red ferroviária de la compañia; e. g. recibir información de ubicación de trenes en una línea; mover un cambio de agujas o cambiar el color de la sinalización.
 
-## 3-Configuración
+## 3-Enlaces de interés relacionados con el hito actual
 
-Heroku, el PaaS elegido para este hito del proyecto, necesita 2 ficheros de configuración para el despliegue del código que esté en un repositório GitHub, el app.json y el Procfile.
 
-```{
-  "name": "proyecto",
-  "scripts": {
-  },
-  "env": {
-    "PORT": {
-      "required": true
-    }
-  },
-  "formation": {
-    "web": {
-      "quantity": 1
-    }
-  },
-  "addons": [
 
-  ],
-  "buildpacks": [
-    {
-      "url": "heroku/java"
-    }
-  ]
-}
-```
+## 4-Enlaces de interés relacionados con los hitos anteriores
 
-El fichero app.json, presentado arriba, se destina a describir aplicaciones web, es decir, variables de configuración, add-ons y cualquier otra información necesaria para que Heroku pueda correr la aplicación.
-
-Esta tiene una única variable de configuración, `PORT`, que por omissión es requerida en el proyecto con `"required": true`. Se indica que se trata de una aplicación web con `"web"`, y en `"quantity": 1` se indica que haberá 1 processo que correrá la aplicación.
-
-No hay add-ons que aplicar a la aplicación, por lo que no se indican ningunos. Por ultimo se indica el buildpack necesario para hacer la build de la aplicación, con el URL `heroku/java`.
-
-`web: java $JAVA_OPTS -cp target/classes:target/dependency/* CC1819.Main`
-
-El Procfile, presentado arriba, indica los comandos a ejecutar por las dynos de Heroku que correrán la aplicación. El tipo de processo `web` permite recibir tráfico HTTP. En este caso existe un solo comando, el necesario para correr la aplicación.
-
-## 4-Rutas
-
-La ruta raiz de la aplicación retorna el JSON `{"status":"OK"}`. Llamadas a la ruta `/viajes/1` retornan el JSON `{"origen":"Granada","destino":"Maracena","partida":"08h04","llegada":"08h10","precio":1.5}`.
-
-```{
-   "status": "OK",
-   "ejemplo": { "ruta": "/viajes/1",
-                "valor": "{"origen":"Granada","destino":"Maracena","partida":"08h04","llegada":"08h10","precio":1.5}"
-              }
-}
-```
-
-La aplicación tiene también las rutas `/viajes/2` y `/viajes/3`, que retornan un JSON similar. La ruta `/viajes` retorna un JSON conteniendo esos 3 JSONs.
-
-Existen también las rutas `/noticias/1`, `/noticias/2` y `/noticias/3`, que retornan cada uno un JSON con una string. La ruta `/noticias` retorna un JSON con esas 3 strings.
-
-## 5-Elección del PaaS
-
-Existen hoy en día algunas opciones de PaaS disponibles, pagas o gratuitas con recursos limitados. Heroku y OpenShift soportan lenguajes como Java, Node.js, PHP, Python, Ruby y Perl. Las dos son gratuitas con recursos limitados, suficientes para desarrollar la práctica de la asignatura.
-
-Fui presentado a Heroku en la charla [De 0 a Cloud](https://www.meetup.com/es-ES/granadagdg/events/255451617/?rv=wm1&_xtd=gatlbWFpbF9jbGlja9oAJDFhZmQzMjkwLWI0OWYtNGUzYy1hNzdmLTNjNjcwODIwYzYyOA&_af=event&_af_eid=255451617), donde me ha gustado su facilidad tanto de uso como de despliegue de aplicaciones en la cloud. Así, elegi ese PaaS para el hito.
-
-## 6-Funcionamiento de la aplicación
-
-La aplicación es un microservicio basado en REST, que almacena datos referentes a viajes y noticias. Los viajes son almacenados en un data object conteniendo su origen, destino, hora de partida, hora de salida y precio. Las noticias son simplemente strings de caracteres.
-
-Los dos tipos de datos son almacenados en arrays por un data access object, el cual suporta operaciones de lectura, escrita y remoción sobre los mismos. Remoción de elementos no elimina su índice, solo limpia su contenido, dejando intactos los restantes elementos y sus índices.
-
-Una clase de servicio web, creada con recurso a la microframework [Javalin](https://javalin.io/), efectua las operaciones REST GET, POST y DELETE sobre esa clase. Pruebas son efectuadas tanto al data access object como al servicio web, estas ultimas con recurso al cliente HTTP [OkHttp](http://square.github.io/okhttp/).
-
-## 7-Creación de la aplicación
-
-Primeiramente, he leído el contenido presente en la materia de [PaaS](http://jj.github.io/CC/documentos/temas/PaaS) y he realizado algunos de los ejercicios.
-
-En seguida he realizado en Java una pequeña aplicación de prueba similar al del microservicio a implementar, con el objetivo de hacer experimentos con el microframework y buscar la mejor manera de implementar el microservicio.
-
-Después de hacer los ejercicios más relevantes, y teniendo entonces una buena parte del código necesário, empezé a hacer la aplicación de la práctica con base en la aplicación de prueba, creando rapidamente el código de las clases y algunas pruebas. Completé primero las pruebas de las clases concretas, después las pruebas del servicio web, corrigindo cuando necesario el código de las clases.
-
-## 8-Motivo
-
-Se pretende en esta asignatura un proyecto libre basado en la nube, donde se valorará la infraestructura más que el número de líneas de código. Así, elegi este proyecto tanto por mi gusto por los trenes, como por se tratar de un proyecto viable para la asignatura: la virtualización de la infraestructura informática de una empresa de ferrocarril, necesariamente compleja e sirviendo a miles sino a millones de personas.
-
-## 9-Hitos
-
-Tratándose de un proyecto individual destinado exclusivamente a la asignatura, he considerado que los diferentes hitos de la asignatura se adecuaban a mi proyecto y que por tanto no era necesario cambiarlos. Son hasta ahora 8 en total, siendo este documento el punto principal del Hito 1.
-
-Hito 0 - Uso correcto de Git y GitHub (https://github.com/migueldgoncalves/CCproj_1819/milestone/1)
-
-Hito 1 - Definición del proyecto (https://github.com/migueldgoncalves/CCproj_1819/milestone/2)
-
-Hito 2 - Creación de un microservicio y despliegue en PaaS (https://github.com/migueldgoncalves/CCproj_1819/milestone/8)
-
-Hito 3 - Provisionamiento de máquinas virtuales (https://github.com/migueldgoncalves/CCproj_1819/milestone/3)
-
-Hito 4 - Automatización de la creación de máquinas virtuales (https://github.com/migueldgoncalves/CCproj_1819/milestone/4)
-
-Hito 5 - Orquestación de máquinas virtuales (https://github.com/migueldgoncalves/CCproj_1819/milestone/5)
-
-Hito 6 - Contenedores para despliegue en la nube (https://github.com/migueldgoncalves/CCproj_1819/milestone/6)
-
-Hito 7 - Composición de servicios (https://github.com/migueldgoncalves/CCproj_1819/milestone/7)
+[Configuración del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_configuracion.md)
+[Elección del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_eleccion.md)
+[Creación de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/creacion_aplicacion.md)
+[Configuración del despliegue](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/despliegue_PaaS.md)
+[Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md)
+[Hitos del proyecto](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/hitos.md)
+[Motivo de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/motivo.md)
+[Rutas](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/rutas.md)
