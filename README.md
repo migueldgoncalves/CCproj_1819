@@ -139,6 +139,9 @@ Se ejecuta el playbook de igual manera, usando el comando `ansible-playbook hito
 Más información sobre el provisionamiento [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento.md).
 Inclui la justificación del sistema de gestión de configuración usado, la cobertura del microservicio implementado y una explicación detallada del playbook utilizado.
 
+Información sobre comprobación de playbooks [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md).
+Inclui mi comprobación de los playbooks de @danielbc09 y @jabonillab, así como su comprobación de mi playbook.
+
 ## 5-Enlaces de interés relacionados con los hitos anteriores
 
 [Configuración del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_configuracion.md)
