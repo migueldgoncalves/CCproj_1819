@@ -1,6 +1,6 @@
 # Infraestructura de gestión ferroviária basada en la nube
 
-## 1-Resúmen
+## Resúmen
 
 Esta aplicación se trata de mi proyecto de la asignatura de Cloud Computing: Fundamentos e Infraestructuras.
 
@@ -22,51 +22,17 @@ Despliegue https://javalinapp.herokuapp.com/
 
 MV: hito3.francecentral.cloudapp.azure.com
 
-### 1.1-Estado actual
+### Estado actual
 
 En su estado actual, habendose concluído el [Hito 3](https://github.com/migueldgoncalves/CCproj_1819/milestone/3), el proyecto consiste en la funcionalidad básica del microservicio de Información al Cliente implementada y desplegada en un dyno Heroku, así como los pasos para desplegarlo en una máquina virtual Azure.
 
-## 2-Arquitectura y características
-
-<img src="https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Diagrama.png" alt="https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Diagrama.png">
-
-La aplicación está siendo desarrollada usando la arquitectura basada em microservicios. Esta arquitectura tiene grande popularidad hoy en día, una vez que comparativamente a la arquitectura monolítica trae un aumento en la eficiencia; una mayor facilidad de escalabilidad y de actualización de cada microservicio en separado; así como la posibilidad de usar más que un lenguaje o framework en la aplicación.
-
-Tendrá 4 microservicios principales: Información al Cliente; Gestión de Viajes; Autenticación; y Gestión de Equipos. Casi todos serán desarrollados usando el lenguaje Java y el microframework Javalin, e tendrán una base de datos MongoDB. La excepción será el microservicio de Gestión de Equipos, el cual será desarrollado usando el lenguaje Ruby y el microframework Sinatra, además contará con una base de datos Neo4J una vez que tendrá datos en grafos.
-
-Existirán además um broker o servicio de mensajería, el cual será el RabbitMQ por su grande eficiencia; y una API Gateway para dar servicio a todos los clientes de la aplicación, la cual será desarrollada usando Node.js.
-
-Los 4 microservicios principales contarán con una REST API. Recibirán y respondrán a pedidos de la API Gateway. Adicionalmente, el microservicio de autenticación recibirá y respondrá a pedidos de los otros 3 microservicios y de la API Gateway. Los microservicios de Información al Cliente y de Gestión de Viajes tendrán también una conexión HTTP, dada la forte relación entre los datos de los dos microservicios.
-
-Los microservicios de Información al Cliente, Gestión de Viajes y Gestión de Equipos escribirán y leerán mensajes del broker.
-
-Al terminar el Hito 3, se encuentra implementada la funcionalidad básica del microservicio de Información al Cliente, que de momento permite la escrita, lectura y remoción directa de viajes y noticias almacenadas en arrays. No se ha implementado su conexión a la base de datos MongoDB, aunque el playbook de Ansible creado inclua ya la instalación y arranque de MongoDB.
-
-### 2.1-Información al Cliente
-
-Permitirá a clientes acceder a horarios de trenes, precios de viajes y noticias de ámbito ferroviário. Empleados con los permisos adecuados podrán editar dicha información. Cambios en horarios y precios serán comunicados via HTTP con el microservicio de Gestión de Viajes con el fin de mantener la consistencia; dichos cambios podrán ser recusados por el microservicio, lo que llevará a su cancelamiento.
-
-Su funcionalidad básica se ha implementado en el Hito 2. El microservicio no ha sido alterado en el Hito 3.
-
-### 2.2-Autenticación
-
-Permitirá tanto a clientes como a empleados crear cuenta y autenticarse en el sistema. El microservicio garantizará los correctos permisos de cada usuario del sistema, de modo a que cada uno sólo tenga accesso a las funciones adecuadas del sistema. Empleados con los permisos correctos podrán atribuir y cambiar permisos a otros usuarios.
-
-### 2.3-Gestión de Viajes
-
-Permitirá a clientes comprar viajes y gestionar reservas, por ejemplo cambiando el asiento o cancelandolas. Empleados con los permisos adecuados podrán comprar y gestionar viajes en nombre de clientes. Cambios en horarios y precios en el microservicio de Información al Cliente serán comunicados con este microservicio por HTTP; este podrá recusarlos e comunicar eso, o aceptarlos y cambiar también su base de datos.
-
-### 2.4-Gestión de equipos
-
-El único de los 4 microservicios sin acceso por parte de los clientes. Empleados con los permisos adecuados podrán gestionar y monitorizar equipos ferroviários en parte o toda la red ferroviária de la compañia; e. g. recibir información de ubicación de trenes en una línea; mover un cambio de agujas o cambiar el color de la sinalización.
-
-## 3-Configuración y provisionamiento de una MV, y despliegue en ella de la aplicación
+## Configuración y provisionamiento de una MV, y despliegue en ella de la aplicación
 
 Este tutorial fue realizado en una máquina física con el sistema operativo Ubuntu 16.04.5 LTS (Xenial Xerus).
 
 Se destina a enseñar paso a paso a configurar una máquina virtual en Microsoft Azure, a provisionarla con el necesario para el despliegue de la aplicación de este repositorio, y a desplegarla en esa máquina virtual.
 
-### 3.1-Instalación y configuración de Ansible
+### Instalación y configuración de Ansible
 
 El provisionamiento de la máquina virtual se hará usando Ansible. Para instalarlo en nuestra máquina local (no es necesario instalarlo en la máquina virtual) hay que tener la utilidad de instalación de módulos `pip`. Una vez teniendo `pip` instalado, Ansible se instalará utilizando el comando
 
@@ -103,7 +69,7 @@ En el fichero `hito3.yml` (o cualquier que sea su nombre) hay en seguida que cop
 
 Ansible estará así configurado y listo para provisionar máquinas.
 
-### 3.2-Creación y configuración de la máquina virtual
+### Creación y configuración de la máquina virtual
 
 Para empezar, hay que acceder al [panel de Azure](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/01.png). En él seleccionar "Máquinas virtuales" en el menú de la izquierda y [pulsar](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/02.png) en "Crear máquina virtual".
 
@@ -118,7 +84,7 @@ No hay necesidad de cambiar las opciones por defecto en las pantallas de [Redes]
 
 Acceder al recurso de la máquina virtual creada pulsando en su enlace, y en su [panel](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/11.png) pulsar en Configurar abajo de Nombre DNS. Irá aparecer una dirección IP en el panel, pero por defecto es dinámica y cambiará cada vez que se detenga y inicie la máquina virtual. En la [pantalla de configuración](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/12.png) añadir como Etiqueta de nombre DNS `hito3` (o cualquier que sea el nombre de la máquina virtual), y pulsar en Guardar. Los cambios se harán efectivos en segundos, y entonces ya se podrá proceder al provisionamiento de la máquina virtual y al despliegue de la aplicación.
 
-### 3.3-Provisionamiento de la máquina virtual y despliegue remoto de la aplicación
+### Provisionamiento de la máquina virtual y despliegue remoto de la aplicación
 
 El fichero `hito3.yml`, que estará en el directorio `/etc/ansible`, consiste en un playbook de Ansible que no solo provisionará la máquina virtual sino también despliegará la aplicación para que escuche en el puerto 80. Para ejecutarlo hay que entrar con la consola en dicha directoria y ejecutar `ansible-playbook hito3.yml`. Cambiar el nombre del fichero si necesario. Hay que decir que no sería necesario entrar en dicha directoria, sino escribir la ruta completa del fichero en el comando.
 
@@ -128,13 +94,13 @@ Bastará entonces escribir en un browser `hito3.francecentral.cloudapp.azure.com
 
 Para detener la ejecución de la máquina solo hay que hacer CTRL+C en la consola, lo que detengará lá máquina con mucho output. Ejecutar el playbook `hito3.yml` de nuevo ya producirá un [output diferente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/14.png) una vez que las tasks ya fueron ejecutadas antes. La excepción es la task "Install application using Maven", que siempre retornará `changed` y no `ok` una vez que en esa task se ejecuta un comando directamente en la shell.
 
-### 3.4-Provisionamiento de la máquina local y despliegue local de la aplicación
+### Provisionamiento de la máquina local y despliegue local de la aplicación
 
 El fichero `hito3.yml` puede ser también utilizado para provisionar la máquina local y desplegar en ella la aplicación. Para eso, hay que editar el fichero y cambiar la segunda línea `- hosts: azure` para `- hosts: local`, lo que dirá a Ansible para ejecutar las tasks en los hosts del grupo `local`, en este caso solamente el localhost.
 
 Se ejecuta el playbook de igual manera, usando el comando `ansible-playbook hito3.yml`. Deberá tardar menos de 1 minuto hasta el despliegue de la aplicación, que se puede acceder escribindo `localhost` en un browser, y detener usando igualmente CTRL+C. El output de la consola deberá ser similar a [esto](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/15.png). Ver aqui la [ruta raiz](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/19.png), una [otra](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/20.png) y una [tercera](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Provisionamiento/21.png).
 
-## 4-Enlaces de interés relacionados con el hito actual
+## Enlaces de interés relacionados con el hito actual
 
 Más información sobre el provisionamiento [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento.md).
 Inclui la justificación del sistema de gestión de configuración usado, la cobertura del microservicio implementado y una explicación detallada del playbook utilizado.
@@ -142,7 +108,9 @@ Inclui la justificación del sistema de gestión de configuración usado, la cob
 Información sobre comprobación de playbooks [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md).
 Inclui mi comprobación de los playbooks de @danielbc09 y @jabonillab, así como su comprobación de mi playbook.
 
-## 5-Enlaces de interés relacionados con los hitos anteriores
+## Enlaces de interés relacionados con los hitos anteriores
+
+[Arquitectura y características](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md)
 
 [Configuración del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_configuracion.md)
 
