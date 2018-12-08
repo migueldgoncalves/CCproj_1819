@@ -1,10 +1,10 @@
 # Comprobación
 
-En el Hito 3, una de las tareas que se pedia era comprobar el correcto funcionamiento del playbook de otro compañero de clase en una máquina virtual própria, y en cambio tener el playbook de uno comprobado por otro compañero.
+En el Hito 3, una de las tareas que se pedía era comprobar el correcto funcionamiento del playbook de otro compañero de clase en una máquina virtual própria, y en cambio tener el playbook de uno comprobado por otro compañero.
 
 Así, he comprobado en máquinas virtuales próprias el correcto funcionamiento de los playbooks de @danielbc09 y @jabonillab, que en cambio han comprobado en máquinas virtuales proprias el correcto funcionamiento de mi playbook.
 
-## Comprovación de otros playbooks
+## Comprobación de otros playbooks
 
 He comprobado en máquinas virtuales próprias el correcto funcionamiento de los playbooks tanto de @danielbc09 (enlace al repositorio [aquí](https://github.com/danielbc09/Proyecto_CC)) como de @jabonillab (enlace al repositorio [aquí](https://github.com/jabonillab/ProyectoCC2018)). Cada playbook ha sido ejecutado en una máquina virtual Azure con el sistema operativo Ubuntu 18.04 acabada de crear.
 

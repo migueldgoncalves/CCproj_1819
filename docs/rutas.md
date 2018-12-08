@@ -1,6 +1,6 @@
 # Rutas
 
-La ruta raiz de la aplicación retorna el JSON `{"status":"OK"}`. Llamadas a la ruta `/viajes/1` retornan el JSON `{"origen":"Granada","destino":"Maracena","partida":"08h04","llegada":"08h10","precio":1.5}`.
+La ruta raíz de la aplicación retorna el JSON `{"status":"OK"}`. Llamadas a la ruta `/viajes/1` retornan el JSON `{"origen":"Granada","destino":"Maracena","partida":"08h04","llegada":"08h10","precio":1.5}`.
 
 ```{
    "status": "OK",
