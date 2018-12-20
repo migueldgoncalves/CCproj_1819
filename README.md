@@ -20,9 +20,9 @@ Está distribuido con la licencia MIT.
 
 Despliegue https://javalinapp.herokuapp.com/
 
-MV: ccazure.uksouth.cloudapp.azure.com
+MV: http://ccazure.uksouth.cloudapp.azure.com
 
-MV2: ccazure.uksouth.cloudapp.azure.com
+MV2: http://ccazure.uksouth.cloudapp.azure.com
 
 ### Estado actual
 
