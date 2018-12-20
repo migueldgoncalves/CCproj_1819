@@ -1,4 +1,4 @@
-# Provisionamiento
+# Playbook de Ansible
 
 Para realizar el Hito 3 he elegido Ansible como sistema de gestión de configuración. Se trata de una herramienta más sencilla de usar que Salt, y además está cubierta tanto por parte de los apuntes de la clase como por un [seminario](https://www.meetup.com/es-ES/Granada-Geek/events/255973562/?rv=ea1_v2&_xtd=gatlbWFpbF9jbGlja9oAJDViZWU1ZjJmLWViZDAtNGMwMi05ZTI3LTkxODY0M2YwZjYzNw) de la asignatura dedicado a la herramienta.
 
@@ -71,7 +71,7 @@ El microservicio actualmente en desarrollo, el de Información al Cliente, está
       chdir: Documents/CC1819
 ...
 ```
-Ansible permite especificar las configuraciones y estados a obtener en las máquinas gestionadas utilizando recetas llamadas playbooks, con distintas tareas que indican a Ansible lo que hacer. Arriba se tiene el playbook `hito3.yml`, utilizado para provisionar una máquina virtual Azure con el necesario para correr esta aplicación en su estado actual más su despliegue en dicha máquina.
+Ansible permite especificar las configuraciones y estados a obtener en las máquinas gestionadas utilizando recetas llamadas playbooks, con distintas tareas que indican a Ansible lo que hacer. Arriba se tiene el playbook `playbook.yml`, utilizado para provisionar una máquina virtual Azure con el necesario para correr esta aplicación en su estado actual más su despliegue en dicha máquina.
 
 `---` y `...` delimitan el fichero .yml, el primero empiézalo y el segundo terminalo. Se sigue `- hosts: azure`, que indica que la receta se aplicará a los hosts del grupo `azure`, de acuerdo con el indicado en el fichero `hosts`. En este caso, el grupo `azure` contiene apenas la dirección DNS de la máquina virtual Azure ya creada y en ejecución. Siendo la primera instrucción del playbook, hay que empezarla con un `-`. Después, `become: yes` indica a Azure que hay que tornarse root para ejecutar las tasks. Por fim, `tasks:` delimita la lista de tareas del playbook.
 
