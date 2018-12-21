@@ -22,7 +22,7 @@ Despliegue https://javalinapp.herokuapp.com/
 
 MV: http://ccazure.uksouth.cloudapp.azure.com
 
-MV2: http://ccazure.uksouth.cloudapp.azure.com
+MV2: 51.140.167.247
 
 ### Estado actual
 
