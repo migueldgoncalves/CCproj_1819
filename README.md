@@ -38,6 +38,10 @@ Justificación del sistema cloud, región Azure, imagen, tamaño de la máquina 
 
 Tutorial de provisionamiento y despliegue con Ansible utilizando un script
 
+[Script de provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/script_azure_cli.md)
+
+Explicación detallada del script de provisionamiento creado en este hito
+
 ## Enlaces de interés relacionados con los hitos anteriores
 
 [Arquitectura y características](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md)
