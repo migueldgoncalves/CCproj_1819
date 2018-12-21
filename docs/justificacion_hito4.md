@@ -72,7 +72,7 @@ En seguida se ha borrado a mano todas las imágenes que decían tener otras vers
 }
 ```
 
-Al intentar crear una máquina virtual con cada una de las imágenes arriba, las dos últimas no fueron encontradas, como se puede ver [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Automatizacion/_2.png) para la del medio y [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Automatizacion/Imagen_3.png) para la de abajo. Solo la imágen 'UbuntuServer', de la empresa Canonical, fue encontrada por Azure. De esa forma, ha sido la elegida para las diferentes máquinas virtuales que se crearon al largo de la realización del hito 4, y su URN es el valor de la variable `IMAGEN` del [script de provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/acopio.sh) creado para este hito.
+Al intentar crear una máquina virtual con cada una de las imágenes arriba, las dos últimas no fueron encontradas, como se puede ver [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Automatizacion/Imagen_2.png) para la del medio y [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Automatizacion/Imagen_3.png) para la de abajo. Solo la imágen 'UbuntuServer', de la empresa Canonical, fue encontrada por Azure. De esa forma, ha sido la elegida para las diferentes máquinas virtuales que se crearon al largo de la realización del hito 4, y su URN es el valor de la variable `IMAGEN` del [script de provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/acopio.sh) creado para este hito.
 
 ## Tamaño de la máquina virtual
 
