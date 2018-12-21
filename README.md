@@ -30,7 +30,9 @@ En su estado actual, habendose concluído el [Hito 4](https://github.com/migueld
 
 ## Enlaces de interés relacionados con el hito actual
 
+[Justificación de elecciones](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md)
 
+Justificación del sistema cloud, región Azure, imagen, tamaño de la máquina virtual y tamaño del disco de datos
 
 ## Enlaces de interés relacionados con los hitos anteriores
 
