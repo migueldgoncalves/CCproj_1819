@@ -24,22 +24,22 @@ dado que en cada arranque o creación de raíz la máquina tendrá una direcció
 El script de provisionamiento se encuentra en [este fichero](https://github.com/migueldgoncalves/CCproj_1819/blob/master/acopio.sh). Contiene las siguientes variables, la mayor parte de las cuales puede ser cambiada:
 
 ```
-REGION='uksouth'                                          #Región del centro de datos Azure donde se alojará la aplicación
-GRUPO_NOMBRE='CCGroup'                                    #Nombre del grupo de recursos a crear
-VM_NOMBRE='CCazure'                                       #Nombre a atribuir a la máquina virtual
-IMAGEN='Canonical:UbuntuServer:16.04-LTS:16.04.201812070' #Imágen a utilizar en la máquina virtual
-SSH_LLAVE_RUTA='~/.ssh/id_rsa_azure.pub'                  #Ruta del fichero con la llave pública a utilizar
-VM_TAMANO='Standard_B1s'                                  #Tamaño de la máquina virtual
-DISCO_DATOS_TAMANO=1                                      #Tamaño del disco de datos de la máquina virtual, en GB
-SSH_PUERTO=22                                             #NO CAMBIAR, puerto para comunicación vía SSH
-SSH_PRIORIDAD=100                                         #Tiene que ser diferente de HTTP_PRIORIDAD
-HTTP_PUERTO=80                                            #NO CAMBIAR, puerto para comunicación vía HTTP
-HTTP_PRIORIDAD=110                                        #Tiene que ser diferente de SSH_PRIORIDAD
-SUBSTRING='PublicIp'                                      #NO CAMBIAR
-VM_IP_PUBLICO="$VM_NOMBRE$SUBSTRING"                      #NO CAMBIAR, nombre del recurso con la dirección IP pública
-DNS_NOMBRE='ccazure'                                      #Nombre DNS a atribuir a la máquina virtual
-IP_ALOCACION='Dynamic'                                    #Puede ser 'Dynamic' o 'Static'
-PLAYBOOK_RUTA='/etc/ansible/playbook.yml'                 #Ruta del fichero con el playbook Ansible
+REGION='uksouth'
+GRUPO_NOMBRE='CCGroup'
+VM_NOMBRE='CCazure'
+IMAGEN='Canonical:UbuntuServer:16.04-LTS:16.04.201812070'
+SSH_LLAVE_RUTA='~/.ssh/id_rsa_azure.pub'
+VM_TAMANO='Standard_B1s'
+DISCO_DATOS_TAMANO=1
+SSH_PUERTO=22
+SSH_PRIORIDAD=100
+HTTP_PUERTO=80
+HTTP_PRIORIDAD=110
+SUBSTRING='PublicIp'
+VM_IP_PUBLICO="$VM_NOMBRE$SUBSTRING"
+DNS_NOMBRE='ccazure'
+IP_ALOCACION='Dynamic'
+PLAYBOOK_RUTA='/etc/ansible/playbook.yml'
 ```
 
 Una explicación detallada de los comandos del script se puede encontrar [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/script_azure_cli.md).
