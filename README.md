@@ -34,6 +34,10 @@ En su estado actual, habendose concluído el [Hito 4](https://github.com/migueld
 
 Justificación del sistema cloud, región Azure, imagen, tamaño de la máquina virtual y tamaño del disco de datos
 
+[Provisionamiento con Ansible - Creación automática de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md)
+
+Tutorial de provisionamiento y despliegue con Ansible utilizando un script
+
 ## Enlaces de interés relacionados con los hitos anteriores
 
 [Arquitectura y características](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md)
