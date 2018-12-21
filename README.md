@@ -20,7 +20,7 @@ Está distribuido con la licencia MIT.
 
 Despliegue https://javalinapp.herokuapp.com/
 
-MV: http://ccazure.uksouth.cloudapp.azure.com
+MV: 51.140.167.247
 
 MV2: 51.140.167.247
 
