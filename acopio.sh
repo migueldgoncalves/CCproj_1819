@@ -6,7 +6,7 @@
 REGION='uksouth'                                          #Región del centro de datos Azure donde se alojará la aplicación
 GRUPO_NOMBRE='CCGroup'                                    #Nombre del grupo de recursos a crear
 VM_NOMBRE='CCazure'                                       #Nombre a atribuir a la máquina virtual
-IMAGEN='Canonical:UbuntuServer:16.04-LTS:16.04.201812070' #Imágen a utilizar en la máquina virtual
+IMAGEN='Canonical:UbuntuServer:16.04-LTS:16.04.201812070' #Imagen a utilizar en la máquina virtual
 SSH_LLAVE_RUTA='~/.ssh/id_rsa_azure.pub'                  #Ruta del fichero con la llave pública a utilizar
 VM_TAMANO='Standard_B1s'                                  #Tamaño de la máquina virtual
 DISCO_DATOS_TAMANO=1                                      #Tamaño del disco de datos de la máquina virtual, en GB

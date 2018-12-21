@@ -37,7 +37,7 @@ Se asume que la máquina virtual a crear se llamará `ccazure`, cambie el nombre
 
 En seguida, hay que crear también en la directoria `/etc/ansible` un fichero .yml. El nombre no tiene importancia desde que su nombre termine con `.yml`. Se asumirá que el fichero se llama `playbook.yml`, sin embargo `playbook` puede ser sustituido por cualquier otro nombre.
 
-En el fichero `playbook.yml` (o cualquier que sea su nombre) hay en seguida que copiar y pegar el contenido de este [fichero .yml](https://github.com/migueldgoncalves/CCproj_1819/blob/master/provision/hito3.yml).
+En el fichero `playbook.yml` (o cualquier que sea su nombre) hay en seguida que copiar y pegar el contenido de este [fichero .yml](https://github.com/migueldgoncalves/CCproj_1819/blob/master/provision/playbook.yml).
 
 Ansible estará así configurado y listo para provisionar máquinas.
 
