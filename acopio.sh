@@ -3,7 +3,7 @@
 #Script de creación, configuración y provisionamiento de una máquina virtual en Azure
 
 #Variables
-REGION='uksouth'                                          #Centro de datos Azure donde se alojará la aplicación
+REGION='uksouth'                                          #Región del centro de datos Azure donde se alojará la aplicación
 GRUPO_NOMBRE='CCGroup'                                    #Nombre del grupo de recursos a crear
 VM_NOMBRE='CCazure'                                       #Nombre a atribuir a la máquina virtual
 IMAGEN='Canonical:UbuntuServer:16.04-LTS:16.04.201812070' #Imágen a utilizar en la máquina virtual
