@@ -1,6 +1,6 @@
 # Hitos del proyecto
 
-Tratándose de un proyecto individual destinado exclusivamente a la asignatura, he considerado que los diferentes hitos de la asignatura se adecuaban a mi proyecto y que por tanto no era necesario cambiarlos. Son hasta ahora 8 en total.
+Tratándose de un proyecto individual destinado exclusivamente a la asignatura, he considerado que los diferentes hitos de la asignatura se adecuaban a mi proyecto y que por tanto no era necesario cambiarlos. Son 7 en total.
 
 Hito 0 - Uso correcto de Git y GitHub (https://github.com/migueldgoncalves/CCproj_1819/milestone/1)
 
@@ -15,5 +15,3 @@ Hito 4 - Automatización de la creación de máquinas virtuales (https://github.
 Hito 5 - Orquestación de máquinas virtuales (https://github.com/migueldgoncalves/CCproj_1819/milestone/5)
 
 Hito 6 - Contenedores para despliegue en la nube (https://github.com/migueldgoncalves/CCproj_1819/milestone/6)
-
-Hito 7 - Composición de servicios (https://github.com/migueldgoncalves/CCproj_1819/milestone/7)
