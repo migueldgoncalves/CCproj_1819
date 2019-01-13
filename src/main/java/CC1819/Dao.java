@@ -2,12 +2,27 @@ package CC1819;
 
 import java.util.ArrayList;
 
+import com.mongodb.client.MongoDatabase; 
+import com.mongodb.MongoClient;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Dao {
+	
+	public static final String HOST = "localhost";
+	public static final int MONGO_PORT = 27017;
+	public static final String DATABASE_NAME = "informacion";
+	public static final String VIAJES_COLLECTION = "viajes";
+	public static final String NOTICIAS_COLLECTION = "noticias";
 	
 	private static Dao dao = null;
 	
 	private ArrayList<DataObject> viajes = new ArrayList<>();
 	private ArrayList<String> noticias = new ArrayList<>();
+	
+	private MongoDatabase db = null;
+	
+	private AtomicInteger counter = new AtomicInteger(1);
 	
 	private Dao() {
 		
@@ -15,13 +30,15 @@ public class Dao {
 	
 	private void setDao() {
 		
-		viajes.add(new DataObject("Granada", "Maracena", "08h04", "08h10", 1.50));
-		viajes.add(new DataObject("Granada", "Armilla", "09h16", "09h26", 1.50));
-		viajes.add(new DataObject("Granada", "Huetor Vega", "17h28", "17h40", 1.65));
+		postViaje("Granada", "Maracena", "08h04", "08h10", 1.50);
+		postViaje("Granada", "Armilla", "09h16", "09h26", 1.50);
+		postViaje("Granada", "Huetor Vega", "17h28", "17h40", 1.65);
 		
-		noticias.add("1.000 dias sin tren de Granada a Madrid");
-		noticias.add("Habra Talgo de Granada a Madrid");
-		noticias.add("Podra haber Tren Hotel de Granada a Barcelona?");
+		postNoticia("1.000 dias sin tren de Granada a Madrid");
+		postNoticia("Habra Talgo de Granada a Madrid");
+		postNoticia("Podra haber Tren Hotel de Granada a Barcelona?");
+		
+		setDatabase();
 
 	}
 	
@@ -77,7 +94,19 @@ public class Dao {
 	}
 	
 	public static void cleanDao() {
+		Dao.getDao().db.drop();
 		Dao.dao = null;
+	}
+	
+	public void setDatabase() {
+		
+		//La instancia de Mongo correra en http://<HOST> y escuchara en el puerto MONGO_PORT
+		MongoClient mongo = new MongoClient( HOST , MONGO_PORT );
+		// La base de datos es creada automaticamente si no existe
+		db = mongo.getDatabase(DATABASE_NAME);
+		// Collections son como tablas en bases de datos relacionales
+		db.createCollection(VIAJES_COLLECTION);
+		db.createCollection(NOTICIAS_COLLECTION);
 	}
 	
 }
