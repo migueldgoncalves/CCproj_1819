@@ -1,4 +1,4 @@
-package CC1819.informacion;
+package CC1819.viajes;
 
 import java.util.HashMap;
 
@@ -6,8 +6,8 @@ import io.javalin.Javalin;
 
 public class JavalinApp {
 	
-	public static final String VARIABLE_PUERTO = "PORT_INFO";
-	public static final int PUERTO_DEFECTO = 7000; //Distinto del puerto del microservicio de viajes
+	public static final String VARIABLE_PUERTO = "PORT_VIAJES";
+	public static final int PUERTO_DEFECTO = 7001; //Distinto del puerto del microservicio de informacion
 	
 	public static final int OK = 200;
 	public static final int CREATED = 201;
@@ -51,37 +51,31 @@ public class JavalinApp {
 			ctx.json(dao.getAllViajes());
 		});
 		
-		app.get("/noticias", ctx -> {
-			ctx.json(dao.getAllNoticias());
-		});
-		
-		app.get("viajes/:viaje-id", ctx -> {
+		app.get("/viajes/:viaje-id", ctx -> {
 			ctx.json(dao.findViajeById(Integer.parseInt(ctx.pathParam("viaje-id"))));
 		});
 		
-		app.get("noticias/:noticia-id", ctx -> {
-			ctx.json(dao.findNoticiaById(Integer.parseInt(ctx.pathParam("noticia-id"))));
+		app.get("/viajes/:viaje-id/disponible", ctx -> {
+				ctx.json(dao.isNotBought(Integer.parseInt(ctx.pathParam("viaje-id"))));
 		});
 		
 		app.post("/viajes", ctx -> {
-			DataObject viaje = ctx.bodyAsClass(DataObject.class);
-			dao.postViaje(viaje.origen, viaje.destino, viaje.partida, viaje.llegada, viaje.precio);
+			dao.postViaje();
 			ctx.status(CREATED);
 		});
 		
-		app.post("/noticias", ctx -> {
-			String noticia = ctx.bodyAsClass(String.class);
-			dao.postNoticia(noticia);
-			ctx.status(CREATED);
+		app.put("/viajes/:viaje-id/comprar", ctx -> {
+			dao.comprarViaje(Integer.parseInt(ctx.pathParam("viaje-id")));
+			ctx.status(OK);
+		});
+		
+		app.put("/viajes/:viaje-id/cancelar", ctx -> {
+			dao.cancelarCompra(Integer.parseInt(ctx.pathParam("viaje-id")));
+			ctx.status(OK);
 		});
 		
 		app.delete("/viajes/:viaje-id", ctx -> {
 			dao.deleteViaje(Integer.parseInt(ctx.pathParam("viaje-id")));
-			ctx.status(NO_CONTENT);
-		});
-		
-		app.delete("/noticias/:noticia-id", ctx -> {
-			dao.deleteNoticia(Integer.parseInt(ctx.pathParam("noticia-id")));
 			ctx.status(NO_CONTENT);
 		});
 		

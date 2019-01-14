@@ -19,14 +19,15 @@ public class Main {
 			servicio = Integer.parseInt(servicioString);
 		
 		// Arranca el microservicio de informacion al cliente
-		if(servicio==1 || servicio==3) {
+		if(servicio==SERVICIO_INFO || servicio==SERVICIO_TODOS) {
 			CC1819.informacion.JavalinApp app = new CC1819.informacion.JavalinApp();
 			app.init();
 		}
 		
 		//Arranca el microservicio de gestion de viajes
-		if(servicio==2 || servicio==3) {
-			
+		if(servicio==SERVICIO_VIAJES || servicio==SERVICIO_TODOS) {
+			CC1819.viajes.JavalinApp app = new CC1819.viajes.JavalinApp();
+			app.init();
 		}
 	}
 
