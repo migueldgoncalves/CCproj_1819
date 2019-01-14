@@ -6,14 +6,26 @@ import io.javalin.Javalin;
 
 public class JavalinApp {
 	
+	public static final String VARIABLE_PUERTO = "PORT_INFO";
+	public static final int PUERTO_DEFECTO = 7000;
+	
+	public static final int OK = 200;
+	public static final int CREATED = 201;
+	public static final int NO_CONTENT = 204;
+	public static final int BAD_REQUEST = 400;
+	public static final int NOT_FOUND = 404;
+	
+	public static final String PEDIDO_INVALIDO = "Pedido invalido";
+	public static final String PAGINA_NO_EXISTENTE = "Pagina no existente";
+	
 	public JavalinApp() {
 		
 	}
 	
 	public Javalin init() {
 		
-		String portString = System.getenv().get("PORT");
-		int port = 7000;
+		String portString = System.getenv().get(VARIABLE_PUERTO);
+		int port = PUERTO_DEFECTO;
 		if(portString!=null)
 			port = Integer.parseInt(portString);
 		
@@ -23,12 +35,12 @@ public class JavalinApp {
 		
 		app.exception(Exception.class, (e, ctx) -> {
 			e.printStackTrace();
-			ctx.status(400);
-			ctx.result("Pedido invalido");
+			ctx.status(BAD_REQUEST);
+			ctx.result(PEDIDO_INVALIDO);
 		});
 		
-		app.error(404, ctx -> {
-			ctx.result("Pagina no existente");
+		app.error(NOT_FOUND, ctx -> {
+			ctx.result(PAGINA_NO_EXISTENTE);
 		});
 		
 		HashMap<String, String> hash = new HashMap<String, String>();
@@ -54,23 +66,23 @@ public class JavalinApp {
 		app.post("/viajes", ctx -> {
 			DataObject viaje = ctx.bodyAsClass(DataObject.class);
 			dao.postViaje(viaje.origen, viaje.destino, viaje.partida, viaje.llegada, viaje.precio);
-			ctx.status(201);
+			ctx.status(CREATED);
 		});
 		
 		app.post("/noticias", ctx -> {
 			String noticia = ctx.bodyAsClass(String.class);
 			dao.postNoticia(noticia);
-			ctx.status(201);
+			ctx.status(CREATED);
 		});
 		
 		app.delete("/viajes/:viaje-id", ctx -> {
 			dao.deleteViaje(Integer.parseInt(ctx.pathParam("viaje-id")));
-			ctx.status(204);
+			ctx.status(NO_CONTENT);
 		});
 		
 		app.delete("/noticias/:noticia-id", ctx -> {
 			dao.deleteNoticia(Integer.parseInt(ctx.pathParam("noticia-id")));
-			ctx.status(204);
+			ctx.status(NO_CONTENT);
 		});
 		
 		return app;
