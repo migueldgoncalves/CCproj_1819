@@ -1,13 +1,11 @@
-package CC1819;
-
-import java.util.ArrayList;
+package CC1819.informacion;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ClassTest {
+public class ClassInformacionTest {
 	
 	private Dao dao = null;
 	

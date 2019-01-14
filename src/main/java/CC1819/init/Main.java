@@ -1,6 +1,6 @@
-package CC1819;
+package CC1819.init;
 
-import CC1819.JavalinApp;
+import CC1819.informacion.JavalinApp;
 
 public class Main {
 	

@@ -1,4 +1,4 @@
-package CC1819;
+package CC1819.informacion;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +16,7 @@ import com.squareup.okhttp.Response;
 
 import io.javalin.Javalin;
 
-public class ServiceTest {
+public class ServiceInformacionTest {
 	
 	public static final int OK = 200;
 	public static final int CREATED = 201;

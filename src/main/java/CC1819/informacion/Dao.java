@@ -1,4 +1,4 @@
-package CC1819;
+package CC1819.informacion;
 
 import java.util.ArrayList;
 
