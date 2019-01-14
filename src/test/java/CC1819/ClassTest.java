@@ -26,8 +26,8 @@ public class ClassTest {
 		DataObject viaje3 = dao.findViajeById(3);
 		DataObject viaje4 = dao.findViajeById(4);
 		Assert.assertNull(viaje0);
-		Assert.assertTrue(viaje1.origen=="Granada");
-		Assert.assertTrue(viaje2.destino=="Armilla");
+		Assert.assertTrue(viaje1.origen.equals("Granada"));
+		Assert.assertTrue(viaje2.destino.equals("Armilla"));
 		Assert.assertTrue(viaje3.precio==1.65);
 		Assert.assertNull(viaje4);
 		
@@ -37,9 +37,9 @@ public class ClassTest {
 		String noticia3 = dao.findNoticiaById(3);
 		String noticia4 = dao.findNoticiaById(4);
 		Assert.assertNull(noticia0);
-		Assert.assertTrue(noticia1=="1.000 dias sin tren de Granada a Madrid");
-		Assert.assertTrue(noticia2=="Habra Talgo de Granada a Madrid");
-		Assert.assertTrue(noticia3=="Podra haber Tren Hotel de Granada a Barcelona?");
+		Assert.assertTrue(noticia1.equals("1.000 dias sin tren de Granada a Madrid"));
+		Assert.assertTrue(noticia2.equals("Habra Talgo de Granada a Madrid"));
+		Assert.assertTrue(noticia3.equals("Podra haber Tren Hotel de Granada a Barcelona?"));
 		Assert.assertNull(noticia4);
 		
 		//Verifica si el patron Singleton esta bien implementado
@@ -53,8 +53,8 @@ public class ClassTest {
 		viaje3 = dao.findViajeById(3);
 		viaje4 = dao.findViajeById(4);
 		Assert.assertNull(viaje0);
-		Assert.assertTrue(viaje1.origen=="Granada");
-		Assert.assertTrue(viaje2.destino=="Armilla");
+		Assert.assertTrue(viaje1.origen.equals("Granada"));
+		Assert.assertTrue(viaje2.destino.equals("Armilla"));
 		Assert.assertTrue(viaje3.precio==1.65);
 		Assert.assertNull(viaje4);
 		
@@ -64,9 +64,9 @@ public class ClassTest {
 		noticia3 = dao.findNoticiaById(3);
 		noticia4 = dao.findNoticiaById(4);
 		Assert.assertNull(noticia0);
-		Assert.assertTrue(noticia1=="1.000 dias sin tren de Granada a Madrid");
-		Assert.assertTrue(noticia2=="Habra Talgo de Granada a Madrid");
-		Assert.assertTrue(noticia3=="Podra haber Tren Hotel de Granada a Barcelona?");
+		Assert.assertTrue(noticia1.equals("1.000 dias sin tren de Granada a Madrid"));
+		Assert.assertTrue(noticia2.equals("Habra Talgo de Granada a Madrid"));
+		Assert.assertTrue(noticia3.equals("Podra haber Tren Hotel de Granada a Barcelona?"));
 		Assert.assertNull(noticia4);
 	}
 	
@@ -74,10 +74,10 @@ public class ClassTest {
 	public void postViajeTest() {
 		dao.postViaje("Albolote", "Granada", "07h40", "07h52", 1.65);
 		DataObject viaje = dao.findViajeById(4);
-		Assert.assertTrue(viaje.getOrigen()=="Albolote");
-		Assert.assertTrue(viaje.getDestino()=="Granada");
-		Assert.assertTrue(viaje.getPartida()=="07h40");
-		Assert.assertTrue(viaje.getLlegada()=="07h52");
+		Assert.assertTrue(viaje.getOrigen().equals("Albolote"));
+		Assert.assertTrue(viaje.getDestino().equals("Granada"));
+		Assert.assertTrue(viaje.getPartida().equals("07h40"));
+		Assert.assertTrue(viaje.getLlegada().equals("07h52"));
 		Assert.assertTrue(viaje.getPrecio()==1.65);
 	}
 	
@@ -85,7 +85,7 @@ public class ClassTest {
 	public void postNoticiaTest() {
 		dao.postNoticia("AVE en Granada en 2019");
 		String noticia = dao.findNoticiaById(4);
-		Assert.assertTrue(noticia=="AVE en Granada en 2019");
+		Assert.assertTrue(noticia.equals("AVE en Granada en 2019"));
 	}
 	
 	@Test
@@ -100,22 +100,20 @@ public class ClassTest {
 	
 	@Test
 	public void getAllViajesTest() {
-		ArrayList<DataObject> viajes = dao.getAllViajes();
-		Assert.assertTrue(viajes.size()==3);
+		Assert.assertTrue(dao.getAllViajes().size()==3);
 		dao.postViaje("Albolote", "Granada", "07h40", "07h52", 1.65);
-		Assert.assertTrue(viajes.size()==4);
+		Assert.assertTrue(dao.getAllViajes().size()==4);
 		dao.deleteViaje(4);
-		Assert.assertTrue(viajes.size()==4);//Deleting does not remove index, sets value to null
+		Assert.assertTrue(dao.getAllViajes().size()==4);//Deleting does not remove index, sets value to null
 	}
 	
 	@Test
 	public void getAllNoticiasTest() {
-		ArrayList<String> noticias = dao.getAllNoticias();
-		Assert.assertTrue(noticias.size()==3);
+		Assert.assertTrue(dao.getAllNoticias().size()==3);
 		dao.postNoticia("Noticia");
-		Assert.assertTrue(noticias.size()==4);
+		Assert.assertTrue(dao.getAllNoticias().size()==4);
 		dao.deleteNoticia(4);
-		Assert.assertTrue(noticias.size()==4);//Deleting does not remove index, sets value to null
+		Assert.assertTrue(dao.getAllNoticias().size()==4);//Deleting does not remove index, sets value to null
 	}
 	
 	@Test
