@@ -1,4 +1,4 @@
-package CC1819.informacion;
+package CC1819.viajes;
 
 import static org.junit.Assert.*;
 
@@ -16,10 +16,10 @@ import com.squareup.okhttp.Response;
 
 import io.javalin.Javalin;
 
-public class ServiceInformacionTest {
+public class ServiceViajesTest {
 	
-	public static final String VARIABLE_PUERTO = "PORT_INFO";
-	public static final int PUERTO_DEFECTO = 7000; //Distinto del puerto del microservicio de viajes
+	public static final String VARIABLE_PUERTO = "PORT_VIAJES";
+	public static final int PUERTO_DEFECTO = 7001; //Distinto del puerto del microservicio de viajes
 	
 	public static final int OK = 200;
 	public static final int CREATED = 201;
@@ -36,10 +36,13 @@ public class ServiceInformacionTest {
 	public static final String URL_TEMPLATE = "http://localhost:";
 	public static final String URL_NOEXISTENTE = "/paginaQueNoExiste";
 	public static final String URL_VIAJES = "/viajes";
-	public static final String URL_NOTICIAS = "/noticias";
+	public static final String URL_DISPONIBLE = "/disponible";
+	public static final String URL_COMPRAR = "/comprar";
+	public static final String URL_CANCELAR = "/cancelar";
 	
 	public static final String EXCEPCION = "Una excepcion ha ocurrido";
 	public static final String PRUEBA_FALLADA = "Prueba fallada";
+	public static final String SETUP_FALLADO = "Setup de las pruebas fallado";
 	
 	OkHttpClient client = null;
 	
@@ -53,6 +56,18 @@ public class ServiceInformacionTest {
 		JavalinApp javalinApp = new JavalinApp();
 		this.app = javalinApp.init();
 		this.client = new OkHttpClient();
+		
+		try {
+			RequestBody body = RequestBody.create(JSON, "[]");
+			Request request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES).post(body).build();
+			// Crear 3 viajes en el microservicio
+			client.newCall(request).execute();
+			client.newCall(request).execute();
+			client.newCall(request).execute();
+		} catch (Exception e) {
+			System.out.println(SETUP_FALLADO);
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -91,33 +106,15 @@ public class ServiceInformacionTest {
 			String URL = URL_TEMPLATE+port+URL_VIAJES;
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
-			String stringJson = "[{\"origen\":\"Granada\","
-	                + "\"destino\":\"Maracena\","
-	                + "\"partida\":\"08h04\","
-	                + "\"llegada\":\"08h10\","
-	                + "\"precio\":1.5"
-	                + "},"
-	    			+ "{\"origen\":\"Granada\","
-	    	        + "\"destino\":\"Armilla\","
-	    	        + "\"partida\":\"09h16\","
-	    	        + "\"llegada\":\"09h26\","
-	    	        + "\"precio\":1.5"
-	    	        + "},"
-	    			+ "{\"origen\":\"Granada\","
-	    	        + "\"destino\":\"Huetor Vega\","
-	    	        + "\"partida\":\"17h28\","
-	    	        + "\"llegada\":\"17h40\","
-	    	        + "\"precio\":1.65"
-	    	        + "}]";
 			String stringResponse = response.body().string(); //response.body().string() can only be called once
-			assertEquals(stringJson, stringResponse);
+			assertEquals("[0,0,0]", stringResponse);
 			assertEquals(OK, response.code());
 			
 			//Verificar la idempotencia del metodo
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
+			assertEquals("[0,0,0]", stringResponse);
 			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
@@ -127,24 +124,27 @@ public class ServiceInformacionTest {
 	}
 	
 	@Test
-	public void getNoticiasPathTest() {
+	public void getNonExistingViajeTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS;
+			String URL = URL_TEMPLATE+port+URL_VIAJES+"/-1";
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
-			String stringJson = "[\"1.000 dias sin tren de Granada a Madrid\","
-	                + "\"Habra Talgo de Granada a Madrid\","
-	                + "\"Podra haber Tren Hotel de Granada a Barcelona?\""
-	    	        + "]";
 			String stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
+			assertEquals("-1", stringResponse);
 			assertEquals(OK, response.code());
 			
-			//Verificar la idempotencia del metodo
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/0";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
+			assertEquals("-1", stringResponse);
+			assertEquals(OK, response.code());
+			
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/4";
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			stringResponse = response.body().string();
+			assertEquals("-1", stringResponse);
 			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
@@ -159,21 +159,15 @@ public class ServiceInformacionTest {
 			String URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
-			String stringJson = "{\"origen\":\"Granada\","
-	                + "\"destino\":\"Maracena\","
-	                + "\"partida\":\"08h04\","
-	                + "\"llegada\":\"08h10\","
-	                + "\"precio\":1.5"
-	                + "}";
 			String stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
+			assertEquals("0", stringResponse);
 			assertEquals(OK, response.code());
 			
 			//Verificar la idempotencia del metodo
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
+			assertEquals("0", stringResponse);
 			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
@@ -183,21 +177,27 @@ public class ServiceInformacionTest {
 	}
 	
 	@Test
-	public void getANoticiaPathTest() {
+	public void getNonExistingViajeIsDisponible() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/2";
+			String URL = URL_TEMPLATE+port+URL_VIAJES+"/-1"+URL_DISPONIBLE;
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
-			String stringJson = "\"Habra Talgo de Granada a Madrid\"";
 			String stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
+			assertEquals("true", stringResponse);
 			assertEquals(OK, response.code());
 			
-			//Verificar la idempotencia del metodo
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/0"+URL_DISPONIBLE;
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
+			assertEquals("true", stringResponse);
+			assertEquals(OK, response.code());
+			
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/4"+URL_DISPONIBLE;
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			stringResponse = response.body().string();
+			assertEquals("true", stringResponse);
 			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
@@ -207,101 +207,14 @@ public class ServiceInformacionTest {
 	}
 	
 	@Test
-	public void getNonExistingViajeTest() {
+	public void getViajeIsDisponible() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES+"/0";
+			String URL = URL_TEMPLATE+port+URL_VIAJES+"/1"+URL_DISPONIBLE;
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			String stringResponse = response.body().string();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, stringResponse);
-			assertEquals(BAD_REQUEST, response.code());
-			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/4";
-			request = new Request.Builder().url(URL).build();
-			response = client.newCall(request).execute();
-			stringResponse = response.body().string();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, stringResponse);
-			assertEquals(BAD_REQUEST, response.code());
-		}
-		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
-		}
-	}
-	
-	@Test
-	public void getNonExistingNoticiaTest() {
-		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/0";
-			Request request = new Request.Builder().url(URL).build();
-			Response response = client.newCall(request).execute();
-			String stringResponse = response.body().string();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, stringResponse);
-			assertEquals(BAD_REQUEST, response.code());
-			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/4";
-			request = new Request.Builder().url(URL).build();
-			response = client.newCall(request).execute();
-			stringResponse = response.body().string();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, stringResponse);
-			assertEquals(BAD_REQUEST, response.code());
-		}
-		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
-		}
-	}
-	
-	@Test
-	public void postViajeTest() {
-		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES;
-			String stringJson = "{\"origen\":\"Granada\","
-	                + "\"destino\":\"Aeropuerto\","
-	                + "\"partida\":\"06h52\","
-	                + "\"llegada\":\"07h15\","
-	                + "\"precio\":1.85"
-	                + "}";
-			RequestBody body = RequestBody.create(JSON, stringJson);
-			Request request = new Request.Builder().url(URL).post(body).build();
-			Response response = client.newCall(request).execute();
-			assertEquals(CREATED, response.code());
-			
-			request = new Request.Builder().url(URL).build();
-			response = client.newCall(request).execute();
-			String stringResponse = response.body().string();
-			assertTrue(stringResponse.contains(stringJson));
-			
-			request = new Request.Builder().url(URL+"/4").build();
-			response = client.newCall(request).execute();
-			stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
-		}
-		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
-		}
-	}
-	
-	@Test
-	public void postNoticiaTest() {
-		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS;
-			String stringJson = "\"Noticia\"";
-			RequestBody body = RequestBody.create(JSON, stringJson);
-			Request request = new Request.Builder().url(URL).post(body).build();
-			Response response = client.newCall(request).execute();
-			assertEquals(CREATED, response.code());
-			
-			request = new Request.Builder().url(URL).build();
-			response = client.newCall(request).execute();
-			String stringResponse = response.body().string();
-			assertTrue(stringResponse.contains(stringJson));
-			
-			request = new Request.Builder().url(URL+"/4").build();
-			response = client.newCall(request).execute();
-			stringResponse = response.body().string();
-			assertEquals(stringJson, stringResponse);
+			assertEquals("true", stringResponse);
+			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
 			System.out.println(EXCEPCION);
@@ -318,8 +231,7 @@ public class ServiceInformacionTest {
 			RequestBody body = RequestBody.create(JSON, stringJson);
 			Request request = new Request.Builder().url(URL).post(body).build();
 			Response response = client.newCall(request).execute();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, response.body().string());
-			assertEquals(BAD_REQUEST, response.code());
+			assertEquals(CREATED, response.code()); //La funcion de creacion de viaje no recibe argumentos, por eso no falla
 		}
 		catch (Exception e) {
 			System.out.println(EXCEPCION);
@@ -328,15 +240,23 @@ public class ServiceInformacionTest {
 	}
 	
 	@Test
-	public void postInvalidNoticiaTest() {
+	public void postViajeTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS;
-			String stringJson = "{\"origen\":\"Granada\","
-	                + "}";
-			RequestBody body = RequestBody.create(JSON, stringJson);
+			String URL = URL_TEMPLATE+port+URL_VIAJES;
+			RequestBody body = RequestBody.create(JSON, "[]");
 			Request request = new Request.Builder().url(URL).post(body).build();
 			Response response = client.newCall(request).execute();
-			assertEquals(BAD_REQUEST, response.code());
+			assertEquals(CREATED, response.code());
+			
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			String stringResponse = response.body().string();
+			assertEquals("[0,0,0,0]", stringResponse);
+			
+			request = new Request.Builder().url(URL+"/4").build();
+			response = client.newCall(request).execute();
+			stringResponse = response.body().string();
+			assertEquals("0", stringResponse);
 		}
 		catch (Exception e) {
 			System.out.println(EXCEPCION);
@@ -345,37 +265,40 @@ public class ServiceInformacionTest {
 	}
 	
 	@Test
-	public void deleteViajeTest() {
+	public void comprarNoExistenteViaje() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES+"/2";
-			Request request = new Request.Builder().url(URL).delete().build();
+			String URL = URL_TEMPLATE+port+URL_VIAJES+"/-1"+URL_COMPRAR;
+			RequestBody body = RequestBody.create(JSON, "[]");
+			Request request = new Request.Builder().url(URL).put(body).build();
 			Response response = client.newCall(request).execute();
-			assertEquals(NO_CONTENT, response.code());
+			assertEquals(OK, response.code());
 			
-			request = new Request.Builder().url(URL).build();
+			request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES+"/-1"+URL_DISPONIBLE).build();
 			response = client.newCall(request).execute();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, response.body().string());
-			assertEquals(BAD_REQUEST, response.code());
+			String stringResponse = response.body().string();
+			assertEquals("true", stringResponse);
 			
-			//Verificar la idempotencia del metodo
-			request = new Request.Builder().url(URL).delete().build();
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/0"+URL_COMPRAR;
+			body = RequestBody.create(JSON, "[]");
+			request = new Request.Builder().url(URL).put(body).build();
 			response = client.newCall(request).execute();
-			assertEquals(NO_CONTENT, response.code());
+			assertEquals(OK, response.code());
 			
-			request = new Request.Builder().url(URL).build();
+			request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES+"/0"+URL_DISPONIBLE).build();
 			response = client.newCall(request).execute();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, response.body().string());
-			assertEquals(BAD_REQUEST, response.code());
+			stringResponse = response.body().string();
+			assertEquals("true", stringResponse);
 			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
-			request = new Request.Builder().url(URL).build();
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/4"+URL_COMPRAR;
+			body = RequestBody.create(JSON, "[]");
+			request = new Request.Builder().url(URL).put(body).build();
 			response = client.newCall(request).execute();
-			assertTrue(response.body().string().contains("Maracena"));
+			assertEquals(OK, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/3";
-			request = new Request.Builder().url(URL).build();
+			request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES+"/4"+URL_DISPONIBLE).build();
 			response = client.newCall(request).execute();
-			assertTrue(response.body().string().contains("Huetor Vega"));
+			stringResponse = response.body().string();
+			assertEquals("true", stringResponse);
 		}
 		catch (Exception e) {
 			System.out.println(EXCEPCION);
@@ -384,37 +307,71 @@ public class ServiceInformacionTest {
 	}
 	
 	@Test
-	public void deleteNoticiaTest() {
+	public void cancelarNoExistenteViaje() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/2";
-			Request request = new Request.Builder().url(URL).delete().build();
+			String URL = URL_TEMPLATE+port+URL_VIAJES+"/-1"+URL_CANCELAR;
+			RequestBody body = RequestBody.create(JSON, "[]");
+			Request request = new Request.Builder().url(URL).put(body).build();
 			Response response = client.newCall(request).execute();
-			assertEquals(NO_CONTENT, response.code());
+			assertEquals(OK, response.code());
 			
-			request = new Request.Builder().url(URL).build();
+			request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES+"/-1"+URL_DISPONIBLE).build();
 			response = client.newCall(request).execute();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, response.body().string());
-			assertEquals(BAD_REQUEST, response.code());
+			String stringResponse = response.body().string();
+			assertEquals("true", stringResponse);
 			
-			//Verificar la idempotencia del metodo
-			request = new Request.Builder().url(URL).delete().build();
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/0"+URL_CANCELAR;
+			body = RequestBody.create(JSON, "[]");
+			request = new Request.Builder().url(URL).put(body).build();
 			response = client.newCall(request).execute();
-			assertEquals(NO_CONTENT, response.code());
+			assertEquals(OK, response.code());
 			
-			request = new Request.Builder().url(URL).build();
+			request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES+"/0"+URL_DISPONIBLE).build();
 			response = client.newCall(request).execute();
-			assertEquals(JavalinApp.PEDIDO_INVALIDO, response.body().string());
-			assertEquals(BAD_REQUEST, response.code());
+			stringResponse = response.body().string();
+			assertEquals("true", stringResponse);
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/1";
-			request = new Request.Builder().url(URL).build();
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/4"+URL_CANCELAR;
+			body = RequestBody.create(JSON, "[]");
+			request = new Request.Builder().url(URL).put(body).build();
 			response = client.newCall(request).execute();
-			assertEquals("\"1.000 dias sin tren de Granada a Madrid\"", response.body().string());
+			assertEquals(OK, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/3";
-			request = new Request.Builder().url(URL).build();
+			request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES+"/4"+URL_DISPONIBLE).build();
 			response = client.newCall(request).execute();
-			assertEquals("\"Podra haber Tren Hotel de Granada a Barcelona?\"", response.body().string());
+			stringResponse = response.body().string();
+			assertEquals("true", stringResponse);
+		}
+		catch (Exception e) {
+			System.out.println(EXCEPCION);
+			fail(PRUEBA_FALLADA);
+		}
+	}
+	
+	@Test
+	public void comprarCancelarViaje() {
+		try {
+			String URL = URL_TEMPLATE+port+URL_VIAJES+"/1"+URL_COMPRAR;
+			RequestBody body = RequestBody.create(JSON, "[]");
+			Request request = new Request.Builder().url(URL).put(body).build();
+			Response response = client.newCall(request).execute();
+			assertEquals(OK, response.code());
+			
+			request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES+"/1"+URL_DISPONIBLE).build();
+			response = client.newCall(request).execute();
+			String stringResponse = response.body().string();
+			assertEquals("false", stringResponse);
+			
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/1"+URL_CANCELAR;
+			body = RequestBody.create(JSON, "[]");
+			request = new Request.Builder().url(URL).put(body).build();
+			response = client.newCall(request).execute();
+			assertEquals(OK, response.code());
+			
+			request = new Request.Builder().url(URL_TEMPLATE+port+URL_VIAJES+"/1"+URL_DISPONIBLE).build();
+			response = client.newCall(request).execute();
+			stringResponse = response.body().string();
+			assertEquals("true", stringResponse);
 		}
 		catch (Exception e) {
 			System.out.println(EXCEPCION);
@@ -438,41 +395,51 @@ public class ServiceInformacionTest {
 			URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			assertTrue(response.body().string().contains("Maracena"));
+			assertEquals("0", response.body().string());
 			
 			URL = URL_TEMPLATE+port+URL_VIAJES+"/3";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			assertTrue(response.body().string().contains("Huetor Vega"));
+			assertEquals("0", response.body().string());
 		}
 		catch (Exception e) {
 			System.out.println(EXCEPCION);
 			fail(PRUEBA_FALLADA);
 		}
 	}
-	
+
 	@Test
-	public void deleteInvalidNoticiaTest() {
+	public void deleteViajeTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/0";
+			String URL = URL_TEMPLATE+port+URL_VIAJES+"/2";
 			Request request = new Request.Builder().url(URL).delete().build();
 			Response response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/4";
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			assertEquals("-1", response.body().string());
+			assertEquals(OK, response.code());
+			
+			//Verificar la idempotencia del metodo
 			request = new Request.Builder().url(URL).delete().build();
 			response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/1";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			assertEquals("\"1.000 dias sin tren de Granada a Madrid\"", response.body().string());
+			assertEquals("-1", response.body().string());
+			assertEquals(OK, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/3";
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
-			assertEquals("\"Podra haber Tren Hotel de Granada a Barcelona?\"", response.body().string());
+			assertEquals("0", response.body().string());
+			
+			URL = URL_TEMPLATE+port+URL_VIAJES+"/3";
+			request = new Request.Builder().url(URL).build();
+			response = client.newCall(request).execute();
+			assertEquals("0", response.body().string());
 		}
 		catch (Exception e) {
 			System.out.println(EXCEPCION);
