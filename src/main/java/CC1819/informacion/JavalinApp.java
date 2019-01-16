@@ -7,7 +7,9 @@ import io.javalin.Javalin;
 public class JavalinApp {
 	
 	public static final String VARIABLE_PUERTO = "PORT_INFO";
+	public static final String VARIABLE_URL = "URL_INFO";
 	public static final int PUERTO_DEFECTO = 7000; //Distinto del puerto del microservicio de viajes
+	public static final String URL_INFO_DEFECTO = "http://localhost:" + PUERTO_DEFECTO;
 	
 	public static final int OK = 200;
 	public static final int CREATED = 201;
@@ -61,6 +63,11 @@ public class JavalinApp {
 		
 		app.get("noticias/:noticia-id", ctx -> {
 			ctx.json(dao.findNoticiaById(Integer.parseInt(ctx.pathParam("noticia-id"))));
+		});
+		
+		app.get("/numero", ctx -> {
+			ctx.json(dao.getViajesNumber());
+			dao.setMicroservicioActivo(true);
 		});
 		
 		app.post("/viajes", ctx -> {

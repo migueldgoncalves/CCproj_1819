@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 import com.mongodb.MongoClient;
 import org.bson.Document;
 
@@ -26,9 +31,15 @@ public class Dao {
 	public static final String PRECIO_COLUMN = "precio";
 	public static final String NOTICIA_COLUMN = "noticia";
 	
+	public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+	
+	public static final String ERROR_HTTP = "Error al comunicar con el microservicio de gestion de viajes";
+	
 	private static Dao dao = null;
 	
 	private MongoDatabase db = null;
+	
+	private boolean microservicioActivo = false; //Si el microservicio de gestion de viajes esta activo
 	
 	private AtomicInteger counterViajes = new AtomicInteger(0);
 	private AtomicInteger counterNoticias = new AtomicInteger(0);
@@ -76,6 +87,9 @@ public class Dao {
 				.append(LLEGADA_COLUMN, llegada)
 				.append(PRECIO_COLUMN, precio);
 		db.getCollection(VIAJES_COLLECTION).insertOne(document);
+		
+		if(microservicioActivo==true)
+			httpViajePost();
 	}
 	
 	public void postNoticia(String texto) {
@@ -126,6 +140,10 @@ public class Dao {
 		return viajes;
 	}
 	
+	public int getViajesNumber() {
+		return getAllViajes().size();
+	}
+	
 	public ArrayList<String> getAllNoticias() {
 		ArrayList<String> noticias = new ArrayList<>();
 		for(int i=1; i<=counterNoticias.get(); i++)
@@ -135,12 +153,75 @@ public class Dao {
 	
 	public void deleteViaje(int id) {
 		if (0<id && id<=counterViajes.get())
-			db.getCollection(VIAJES_COLLECTION).deleteOne(Filters.eq(ID_COLUMN, id));
+			if (microservicioActivo==false)
+				db.getCollection(VIAJES_COLLECTION).deleteOne(Filters.eq(ID_COLUMN, id));
+			if (microservicioActivo==true && httpViajeDelete(id)==true)
+				db.getCollection(VIAJES_COLLECTION).deleteOne(Filters.eq(ID_COLUMN, id));
 	}
 	
 	public void deleteNoticia(int id) {
 		if (0<id && id<=counterNoticias.get())
 			db.getCollection(NOTICIAS_COLLECTION).deleteOne(Filters.eq(ID_COLUMN, id));
+	}
+	
+	public void httpViajePost() {
+		String url = CC1819.viajes.JavalinApp.URL_VIAJES_DEFECTO + "/viajes";
+		if(System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL)!=null)
+			url = System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL) +
+					System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_PUERTO) + "/viajes";
+		
+		OkHttpClient client = new OkHttpClient();
+		
+		try {
+			RequestBody body = RequestBody.create(JSON, "[]");
+			Request request = new Request.Builder().url(url).post(body).build();
+			client.newCall(request).execute();
+		}
+		catch (Exception e) {
+			System.out.println(ERROR_HTTP);
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean httpViajeDelete(int id) {
+		String urlGet = CC1819.viajes.JavalinApp.URL_VIAJES_DEFECTO + "/viajes/" + id + "/disponible";
+		String urlDelete = CC1819.viajes.JavalinApp.URL_VIAJES_DEFECTO + "/viajes/" + id;
+		if(System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL)!=null) {
+			urlGet = System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL) +
+					System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_PUERTO) + "/viajes/" + id + "/disponible";
+			urlDelete = System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL) +
+					System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_PUERTO) + "/viajes/" + id;
+		}
+		
+		OkHttpClient client = new OkHttpClient();
+		
+		try {
+			// Pregunta al microservicio de viajes si el viaje no esta comprado i.e. si se puede borrar
+			Request request = new Request.Builder().url(urlGet).build();
+			Response response = client.newCall(request).execute();
+			if(response.body().string().equals("true")) {
+				
+				// Borra el viaje en el microservicio de gestion de viajes
+				request = new Request.Builder().url(urlDelete).delete().build();
+				client.newCall(request).execute();
+				return true;
+				
+			}
+			return false;
+		}
+		catch (Exception e) {
+			System.out.println(ERROR_HTTP);
+			e.printStackTrace();
+			return true;
+		}
+	}
+	
+	public void setMicroservicioActivo(boolean value) {
+		this.microservicioActivo = value;
+	}
+	
+	public boolean getMicroservicioActivo() {
+		return this.microservicioActivo;
 	}
 	
 	public static void cleanDao() {

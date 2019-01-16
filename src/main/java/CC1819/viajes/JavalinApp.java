@@ -7,7 +7,9 @@ import io.javalin.Javalin;
 public class JavalinApp {
 	
 	public static final String VARIABLE_PUERTO = "PORT_VIAJES";
-	public static final int PUERTO_DEFECTO = 7001; //Distinto del puerto del microservicio de informacion
+	public static final String VARIABLE_URL = "URL_VIAJES";
+	public static final int PUERTO_DEFECTO = 7001; //Distinto del puerto del microservicio de viajes
+	public static final String URL_VIAJES_DEFECTO = "http://localhost:" + PUERTO_DEFECTO;
 	
 	public static final int OK = 200;
 	public static final int CREATED = 201;

@@ -118,13 +118,17 @@ public class ClassInformacionTest {
 	public void deleteViajesTest() {
 		dao.deleteViaje(4);
 		Assert.assertNull(dao.findViajeById(4));
+		Assert.assertTrue(dao.getAllViajes().size()==3);
 		dao.deleteViaje(2);
 		Assert.assertNull(dao.findViajeById(2));
 		Assert.assertNotNull(dao.findViajeById(3));
+		Assert.assertTrue(dao.getAllViajes().size()==3);
 		dao.deleteViaje(0);
 		Assert.assertNull(dao.findViajeById(0));
+		Assert.assertTrue(dao.getAllViajes().size()==3);
 		dao.deleteViaje(-1);
 		Assert.assertNotNull(dao.findViajeById(1));
+		Assert.assertTrue(dao.getAllViajes().size()==3);
 	}
 	
 	@Test
