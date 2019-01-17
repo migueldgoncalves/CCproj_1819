@@ -6,7 +6,7 @@ import io.javalin.Javalin;
 
 public class JavalinAppHeroku {
 	
-	public static final String VARIABLE_PUERTO = "PORT_INFO";
+	public static final String VARIABLE_PUERTO = "PORT";
 	public static final String VARIABLE_URL = "URL_INFO";
 	public static final int PUERTO_DEFECTO = 7000; //Distinto del puerto del microservicio de viajes
 	public static final String URL_INFO_DEFECTO = "http://localhost:" + PUERTO_DEFECTO;
@@ -31,7 +31,7 @@ public class JavalinAppHeroku {
 		if(portString!=null)
 			port = Integer.parseInt(portString);
 		
-		DaoHeroku dao = DaoHeroku.getDao(); //Principal diferencia con el JavalinApp estandar
+		DaoHeroku dao = DaoHeroku.getDao(); //Principal diferencia con el JavalinApp estandar de este microservicio
 		
 		Javalin app = Javalin.create().start(port);
 		

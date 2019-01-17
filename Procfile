@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT_INFO -cp target/classes:target/dependency/* CC1819.init.Main
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* CC1819.init.Main

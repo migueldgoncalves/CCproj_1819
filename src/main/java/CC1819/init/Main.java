@@ -15,7 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		String servicioString = System.getenv().get(VARIABLE_SERVICIO);
-		int servicio = SERVICIO_HEROKU; //Valor por defecto
+		int servicio = SERVICIO_INFO; //Valor por defecto
 		if(servicioString!=null)
 			servicio = Integer.parseInt(servicioString);
 		
