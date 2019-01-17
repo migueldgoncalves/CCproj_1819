@@ -1,7 +1,5 @@
 package CC1819.init;
 
-import CC1819.informacion.JavalinApp;
-
 public class Main {
 	
 	// Decide que servicio o servicios se ejecutaran
@@ -12,10 +10,12 @@ public class Main {
 	public static final int SERVICIO_VIAJES = 2;
 	public static final int SERVICIO_TODOS = 3;
 	
+	public static final int SERVICIO_DEFECTO = SERVICIO_INFO; //Valor por defecto
+	
 	public static void main(String[] args) {
 		
 		String servicioString = System.getenv().get(VARIABLE_SERVICIO);
-		int servicio = SERVICIO_INFO; //Valor por defecto
+		int servicio = SERVICIO_DEFECTO;
 		if(servicioString!=null)
 			servicio = Integer.parseInt(servicioString);
 		
