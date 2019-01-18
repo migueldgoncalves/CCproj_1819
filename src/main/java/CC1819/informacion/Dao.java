@@ -17,10 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Dao {
 	
-	public static final String HOST = "localhost";
-	public static final int MONGO_PORT = 27017;
-	public static final String DATABASE_NAME = "informacion";
-	public static final String VIAJES_COLLECTION = "viajes";
+	public static final String VIAJES_COLLECTION = "viajesInfo";
 	public static final String NOTICIAS_COLLECTION = "noticias";
 	
 	public static final String ID_COLUMN = "id";
@@ -165,10 +162,7 @@ public class Dao {
 	}
 	
 	public void httpViajePost() {
-		String url = CC1819.viajes.JavalinApp.URL_VIAJES_DEFECTO + "/viajes";
-		if(System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL)!=null)
-			url = System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL) +
-					System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_PUERTO) + "/viajes";
+		String url = CC1819.init.Main.urlViajes + "/viajes";
 		
 		OkHttpClient client = new OkHttpClient();
 		
@@ -184,14 +178,8 @@ public class Dao {
 	}
 	
 	public boolean httpViajeDelete(int id) {
-		String urlGet = CC1819.viajes.JavalinApp.URL_VIAJES_DEFECTO + "/viajes/" + id + "/disponible";
-		String urlDelete = CC1819.viajes.JavalinApp.URL_VIAJES_DEFECTO + "/viajes/" + id;
-		if(System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL)!=null) {
-			urlGet = System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL) +
-					System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_PUERTO) + "/viajes/" + id + "/disponible";
-			urlDelete = System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_URL) +
-					System.getenv().get(CC1819.viajes.JavalinApp.VARIABLE_PUERTO) + "/viajes/" + id;
-		}
+		String urlGet = CC1819.init.Main.urlViajes + "/viajes/" + id + "/disponible";
+		String urlDelete = CC1819.init.Main.urlViajes + "/viajes/" + id;
 		
 		OkHttpClient client = new OkHttpClient();
 		
@@ -231,10 +219,13 @@ public class Dao {
 	
 	public void setDatabase() {
 		
+		if(Dao.getDao().db!=null)
+			Dao.getDao().db.drop();
+		
 		//La instancia de Mongo corre en http://<HOST> y escucha en el puerto MONGO_PORT
-		MongoClient mongo = new MongoClient(HOST, MONGO_PORT);
+		MongoClient mongo = new MongoClient(CC1819.init.Main.MONGO_HOST, CC1819.init.Main.MONGO_PORT);
 		// La base de datos es creada automaticamente si no existe
-		db = mongo.getDatabase(DATABASE_NAME);
+		db = mongo.getDatabase(CC1819.init.Main.DATABASE_NAME);
 		// Collections son como tablas en bases de datos relacionales
 		db.createCollection(VIAJES_COLLECTION);
 		db.createCollection(NOTICIAS_COLLECTION);

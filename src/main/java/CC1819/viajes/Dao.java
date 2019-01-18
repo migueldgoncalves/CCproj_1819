@@ -17,15 +17,10 @@ import com.mongodb.MongoClient;
 import org.bson.Document;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.Random;
 
 public class Dao {
 	
-	public static final String HOST = "localhost";
-	public static final int MONGO_PORT = 27017;
-	public static final String DATABASE_NAME = "viajes";
 	public static final String VIAJES_COLLECTION = "viajes";
 	
 	public static final String ID_COLUMN = "id";
@@ -61,12 +56,7 @@ public class Dao {
 		
 		Dao.dao.setDatabase();
 		
-		int servicio = Main.SERVICIO_INFO;
-		if(System.getenv().get(Main.VARIABLE_SERVICIO)!=null)
-			servicio = Integer.parseInt(System.getenv().get(Main.VARIABLE_SERVICIO));
-		
-		if(servicio==Main.SERVICIO_TODOS || Dao.dao.pruebaIntegracion) //Si el microservicio de informacion tambien esta funcionando
-			Dao.dao.fillDatabase(); //sincroniza con el
+		Dao.dao.fillDatabase();
 		
 		return Dao.dao;
 			
@@ -78,10 +68,7 @@ public class Dao {
 	
 	public void fillDatabase() {
 		
-		String url = CC1819.informacion.JavalinApp.URL_INFO_DEFECTO + "/numero";
-		if(System.getenv().get(CC1819.informacion.JavalinApp.VARIABLE_URL)!=null)
-			url = System.getenv().get(CC1819.informacion.JavalinApp.VARIABLE_URL) +
-					System.getenv().get(CC1819.informacion.JavalinApp.VARIABLE_PUERTO) + "/numero";
+		String url = CC1819.init.Main.urlInfo + "/numero";
 		
 		OkHttpClient client = new OkHttpClient();
 		
@@ -164,10 +151,13 @@ public class Dao {
 	
 	public void setDatabase() {
 		
+		if(Dao.getDao().db!=null)
+			Dao.getDao().db.drop();
+		
 		//La instancia de Mongo corre en http://<HOST> y escucha en el puerto MONGO_PORT
-		MongoClient mongo = new MongoClient(HOST, MONGO_PORT);
+		MongoClient mongo = new MongoClient(CC1819.init.Main.MONGO_HOST, CC1819.init.Main.MONGO_PORT);
 		// La base de datos es creada automaticamente si no existe
-		db = mongo.getDatabase(DATABASE_NAME);
+		db = mongo.getDatabase(CC1819.init.Main.DATABASE_NAME);
 		// Collections son como tablas en bases de datos relacionales
 		db.createCollection(VIAJES_COLLECTION);
 	}
