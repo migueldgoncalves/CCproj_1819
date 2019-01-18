@@ -6,10 +6,8 @@ import io.javalin.Javalin;
 
 public class JavalinAppHeroku {
 	
-	public static final String VARIABLE_PUERTO = "PORT";
-	public static final String VARIABLE_URL = "URL_INFO";
-	public static final int PUERTO_DEFECTO = 7000; //Distinto del puerto del microservicio de viajes
-	public static final String URL_INFO_DEFECTO = "http://localhost:" + PUERTO_DEFECTO;
+	public static final String VARIABLE_PUERTO = "PORT"; //Nombre necesario para funcionar en Heroku
+	public static final int PUERTO_DEFECTO = CC1819.init.Main.PUERTO_DEFECTO_INFO;
 	
 	public static final int OK = 200;
 	public static final int CREATED = 201;

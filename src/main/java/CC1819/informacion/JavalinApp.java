@@ -6,11 +6,6 @@ import io.javalin.Javalin;
 
 public class JavalinApp {
 	
-	public static final String VARIABLE_PUERTO = "PORT_INFO";
-	public static final String VARIABLE_URL = "URL_INFO";
-	public static final int PUERTO_DEFECTO = 7000; //Distinto del puerto del microservicio de viajes
-	public static final String URL_INFO_DEFECTO = "http://localhost:" + PUERTO_DEFECTO;
-	
 	public static final int OK = 200;
 	public static final int CREATED = 201;
 	public static final int NO_CONTENT = 204;
@@ -26,10 +21,7 @@ public class JavalinApp {
 	
 	public Javalin init() {
 		
-		String portString = System.getenv().get(VARIABLE_PUERTO);
-		int port = PUERTO_DEFECTO;
-		if(portString!=null)
-			port = Integer.parseInt(portString);
+		int port = CC1819.init.Main.puertoInfo;
 		
 		Dao dao = Dao.getDao();
 		
