@@ -18,8 +18,8 @@ import io.javalin.Javalin;
 
 public class ServiceInformacionTest {
 	
-	public static final String VARIABLE_PUERTO = "PORT_INFO";
-	public static final int PUERTO_DEFECTO = 7000; //Distinto del puerto del microservicio de viajes
+	public static final String VARIABLE_PUERTO = CC1819.init.Main.VARIABLE_PUERTO_INFO;
+	public static final int PUERTO_DEFECTO = CC1819.init.Main.PUERTO_DEFECTO_INFO;
 	
 	public static final int OK = 200;
 	public static final int CREATED = 201;
@@ -28,12 +28,9 @@ public class ServiceInformacionTest {
 	public static final int NOT_FOUND = 404;
 	
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    
-    private int port = 0;
 	
 	private Javalin app = null;
 	
-	public static final String URL_TEMPLATE = "http://localhost:";
 	public static final String URL_NOEXISTENTE = "/paginaQueNoExiste";
 	public static final String URL_VIAJES = "/viajes";
 	public static final String URL_NOTICIAS = "/noticias";
@@ -45,11 +42,7 @@ public class ServiceInformacionTest {
 	
 	@Before
 	public void setUp() {
-		String portString = System.getenv().get(VARIABLE_PUERTO);
-		this.port = PUERTO_DEFECTO;
-		if(portString!=null)
-			port = Integer.parseInt(portString);
-		
+		CC1819.init.Main.variableSetter();
 		JavalinApp javalinApp = new JavalinApp();
 		this.app = javalinApp.init();
 		this.client = new OkHttpClient();
@@ -58,37 +51,35 @@ public class ServiceInformacionTest {
 	@Test
 	public void invalidPathTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOEXISTENTE;
+			String URL = CC1819.init.Main.urlInfo+URL_NOEXISTENTE;
 			Request request = new Request.Builder().url(new URL(URL)).build();
 			Response response = client.newCall(request).execute();
 			assertEquals(NOT_FOUND, response.code());
 			assertEquals(JavalinApp.PAGINA_NO_EXISTENTE, response.body().string());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void rootPathTest() {
 		try {
-			String URL = URL_TEMPLATE+port;
+			String URL = CC1819.init.Main.urlInfo;
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			assertEquals(OK, response.code());
 			assertEquals("{\"status\":\"OK\"}", response.body().string());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void getViajesPathTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES;
+			String URL = CC1819.init.Main.urlInfo+URL_VIAJES;
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			String stringJson = "[{\"origen\":\"Granada\","
@@ -121,15 +112,14 @@ public class ServiceInformacionTest {
 			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void getNoticiasPathTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS;
+			String URL = CC1819.init.Main.urlInfo+URL_NOTICIAS;
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			String stringJson = "[\"1.000 dias sin tren de Granada a Madrid\","
@@ -148,15 +138,14 @@ public class ServiceInformacionTest {
 			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void getAViajePathTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
+			String URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/1";
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			String stringJson = "{\"origen\":\"Granada\","
@@ -177,15 +166,14 @@ public class ServiceInformacionTest {
 			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void getANoticiaPathTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/2";
+			String URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/2";
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			String stringJson = "\"Habra Talgo de Granada a Madrid\"";
@@ -201,22 +189,21 @@ public class ServiceInformacionTest {
 			assertEquals(OK, response.code());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void getNonExistingViajeTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES+"/0";
+			String URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/0";
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			String stringResponse = response.body().string();
 			assertEquals(JavalinApp.PEDIDO_INVALIDO, stringResponse);
 			assertEquals(BAD_REQUEST, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/4";
+			URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/4";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			stringResponse = response.body().string();
@@ -224,22 +211,21 @@ public class ServiceInformacionTest {
 			assertEquals(BAD_REQUEST, response.code());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void getNonExistingNoticiaTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/0";
+			String URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/0";
 			Request request = new Request.Builder().url(URL).build();
 			Response response = client.newCall(request).execute();
 			String stringResponse = response.body().string();
 			assertEquals(JavalinApp.PEDIDO_INVALIDO, stringResponse);
 			assertEquals(BAD_REQUEST, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/4";
+			URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/4";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			stringResponse = response.body().string();
@@ -247,15 +233,14 @@ public class ServiceInformacionTest {
 			assertEquals(BAD_REQUEST, response.code());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void postViajeTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES;
+			String URL = CC1819.init.Main.urlInfo+URL_VIAJES;
 			String stringJson = "{\"origen\":\"Granada\","
 	                + "\"destino\":\"Aeropuerto\","
 	                + "\"partida\":\"06h52\","
@@ -278,15 +263,14 @@ public class ServiceInformacionTest {
 			assertEquals(stringJson, stringResponse);
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void postNoticiaTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS;
+			String URL = CC1819.init.Main.urlInfo+URL_NOTICIAS;
 			String stringJson = "\"Noticia\"";
 			RequestBody body = RequestBody.create(JSON, stringJson);
 			Request request = new Request.Builder().url(URL).post(body).build();
@@ -304,15 +288,14 @@ public class ServiceInformacionTest {
 			assertEquals(stringJson, stringResponse);
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void postInvalidViajeTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES;
+			String URL = CC1819.init.Main.urlInfo+URL_VIAJES;
 			String stringJson = "{\"origen\":\"Granada\","
 	                + "}";
 			RequestBody body = RequestBody.create(JSON, stringJson);
@@ -322,15 +305,14 @@ public class ServiceInformacionTest {
 			assertEquals(BAD_REQUEST, response.code());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void postInvalidNoticiaTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS;
+			String URL = CC1819.init.Main.urlInfo+URL_NOTICIAS;
 			String stringJson = "{\"origen\":\"Granada\","
 	                + "}";
 			RequestBody body = RequestBody.create(JSON, stringJson);
@@ -339,15 +321,14 @@ public class ServiceInformacionTest {
 			assertEquals(BAD_REQUEST, response.code());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void deleteViajeTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES+"/2";
+			String URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/2";
 			Request request = new Request.Builder().url(URL).delete().build();
 			Response response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
@@ -367,26 +348,25 @@ public class ServiceInformacionTest {
 			assertEquals(JavalinApp.PEDIDO_INVALIDO, response.body().string());
 			assertEquals(BAD_REQUEST, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
+			URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/1";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			assertTrue(response.body().string().contains("Maracena"));
 			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/3";
+			URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/3";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			assertTrue(response.body().string().contains("Huetor Vega"));
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void deleteNoticiaTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/2";
+			String URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/2";
 			Request request = new Request.Builder().url(URL).delete().build();
 			Response response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
@@ -406,77 +386,74 @@ public class ServiceInformacionTest {
 			assertEquals(JavalinApp.PEDIDO_INVALIDO, response.body().string());
 			assertEquals(BAD_REQUEST, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/1";
+			URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/1";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			assertEquals("\"1.000 dias sin tren de Granada a Madrid\"", response.body().string());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/3";
+			URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/3";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			assertEquals("\"Podra haber Tren Hotel de Granada a Barcelona?\"", response.body().string());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void deleteInvalidViajeTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_VIAJES+"/0";
+			String URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/0";
 			Request request = new Request.Builder().url(URL).delete().build();
 			Response response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/4";
+			URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/4";
 			request = new Request.Builder().url(URL).delete().build();
 			response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/1";
+			URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/1";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			assertTrue(response.body().string().contains("Maracena"));
 			
-			URL = URL_TEMPLATE+port+URL_VIAJES+"/3";
+			URL = CC1819.init.Main.urlInfo+URL_VIAJES+"/3";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			assertTrue(response.body().string().contains("Huetor Vega"));
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	
 	@Test
 	public void deleteInvalidNoticiaTest() {
 		try {
-			String URL = URL_TEMPLATE+port+URL_NOTICIAS+"/0";
+			String URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/0";
 			Request request = new Request.Builder().url(URL).delete().build();
 			Response response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/4";
+			URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/4";
 			request = new Request.Builder().url(URL).delete().build();
 			response = client.newCall(request).execute();
 			assertEquals(NO_CONTENT, response.code());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/1";
+			URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/1";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			assertEquals("\"1.000 dias sin tren de Granada a Madrid\"", response.body().string());
 			
-			URL = URL_TEMPLATE+port+URL_NOTICIAS+"/3";
+			URL = CC1819.init.Main.urlInfo+URL_NOTICIAS+"/3";
 			request = new Request.Builder().url(URL).build();
 			response = client.newCall(request).execute();
 			assertEquals("\"Podra haber Tren Hotel de Granada a Barcelona?\"", response.body().string());
 		}
 		catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(PRUEBA_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 	

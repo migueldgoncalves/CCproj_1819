@@ -16,10 +16,10 @@ import io.javalin.Javalin;
 
 public class IntegracionTest {
 	
-	public static final String VARIABLE_PUERTO_INFO = CC1819.informacion.JavalinApp.VARIABLE_PUERTO;
-	public static final String VARIABLE_PUERTO_VIAJES = CC1819.viajes.JavalinApp.VARIABLE_PUERTO;
-	public static final String VARIABLE_URL_INFO = CC1819.informacion.JavalinApp.VARIABLE_URL;
-	public static final String VARIABLE_URL_VIAJES = CC1819.viajes.JavalinApp.VARIABLE_URL;
+	public static final String VARIABLE_PUERTO_INFO = CC1819.init.Main.VARIABLE_PUERTO_INFO;
+	public static final String VARIABLE_PUERTO_VIAJES = CC1819.init.Main.VARIABLE_PUERTO_VIAJES;
+	public static final String VARIABLE_URL_INFO = CC1819.init.Main.VARIABLE_URL_INFO;
+	public static final String VARIABLE_URL_VIAJES = CC1819.init.Main.VARIABLE_PUERTO_VIAJES;
 	public static final String VARIABLE_SERVICIO = CC1819.init.Main.VARIABLE_SERVICIO;
 	public static final int SERVICIO_VIAJES = CC1819.init.Main.SERVICIO_VIAJES;
 	
@@ -37,28 +37,13 @@ public class IntegracionTest {
 	public static final String URL_COMPRAR = "/comprar";
 	public static final String URL_CANCELAR = "/cancelar";
 	
-	public static final String EXCEPCION = "Una excepcion ha ocurrido";
-	public static final String INTEGRACION_FALLADA = "Integracion fallada";
-	
 	OkHttpClient client = null;
 	
 	@Before
 	public void setUp() {
 		
-		infoURL = CC1819.informacion.JavalinApp.URL_INFO_DEFECTO;
-		viajesURL = CC1819.viajes.JavalinApp.URL_VIAJES_DEFECTO;
-		
-		String servicio = System.getenv().get(VARIABLE_SERVICIO);
-		if(servicio==null)
-			servicio = Integer.toString(CC1819.init.Main.SERVICIO_DEFECTO);
-		String envInfoURL = System.getenv().get(VARIABLE_URL_INFO);
-		String envViajesURL = System.getenv().get(VARIABLE_URL_VIAJES);
-		
-		if(servicio.equals(Integer.toString(SERVICIO_VIAJES)) &&
-				envInfoURL!=null && envViajesURL!=null) {
-			infoURL = envInfoURL + System.getenv().get(VARIABLE_PUERTO_INFO);
-			viajesURL = envViajesURL + System.getenv().get(VARIABLE_PUERTO_VIAJES);
-		}
+		infoURL = CC1819.init.Main.urlInfo;
+		viajesURL = CC1819.init.Main.urlViajes;
 		
 		CC1819.informacion.JavalinApp infoApp = new CC1819.informacion.JavalinApp();
 		this.infoJavalin = infoApp.init();
@@ -70,7 +55,7 @@ public class IntegracionTest {
 	public void integracionTest() {
 		
 		try {
-		
+			
 			// Estado inicial
 			assertEquals(3, CC1819.informacion.Dao.getDao().getViajesNumber());
 			assertFalse(CC1819.informacion.Dao.getDao().getMicroservicioActivo());
@@ -202,15 +187,16 @@ public class IntegracionTest {
 			assertTrue(CC1819.viajes.Dao.getDao().isNotBought(5));
 			
 		} catch (Exception e) {
-			System.out.println(EXCEPCION);
-			fail(INTEGRACION_FALLADA);
+			fail(e.getLocalizedMessage());
 		}
 	}
 
 	@After
 	public void tearDown() {
-		this.infoJavalin.stop();
-		this.viajesJavalin.stop();
+		if(this.infoJavalin!=null)
+			this.infoJavalin.stop();
+		if(this.viajesJavalin!=null)
+			this.viajesJavalin.stop();
 		CC1819.informacion.Dao.cleanDao();
 		CC1819.viajes.Dao.cleanDao();
 	}
