@@ -14,7 +14,7 @@ import com.squareup.okhttp.Response;
 
 import io.javalin.Javalin;
 
-public class IntegracionTest {
+public class LocalIntegracionTest {
 	
 	public static final String VARIABLE_PUERTO_INFO = CC1819.init.Main.VARIABLE_PUERTO_INFO;
 	public static final String VARIABLE_PUERTO_VIAJES = CC1819.init.Main.VARIABLE_PUERTO_VIAJES;
@@ -41,7 +41,7 @@ public class IntegracionTest {
 	
 	@Before
 	public void setUp() {
-		
+		CC1819.init.Main.variableSetter();
 		infoURL = CC1819.init.Main.urlInfo;
 		viajesURL = CC1819.init.Main.urlViajes;
 		
@@ -55,6 +55,9 @@ public class IntegracionTest {
 	public void integracionTest() {
 		
 		try {
+			
+			// Dos microservicios en la misma maquina
+			if(CC1819.init.Main.servicio==CC1819.init.Main.SERVICIO_TODOS) {
 			
 			// Estado inicial
 			assertEquals(3, CC1819.informacion.Dao.getDao().getViajesNumber());
@@ -185,6 +188,8 @@ public class IntegracionTest {
 			assertTrue(CC1819.viajes.Dao.getDao().isNotBought(4));
 			assertEquals(CC1819.viajes.Dao.ASIENTO_DEFECTO, CC1819.viajes.Dao.getDao().findViajeById(5));
 			assertTrue(CC1819.viajes.Dao.getDao().isNotBought(5));
+			
+			}
 			
 		} catch (Exception e) {
 			fail(e.getLocalizedMessage());
