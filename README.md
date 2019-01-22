@@ -1,5 +1,7 @@
 # Infraestructura de gestión ferroviaria basada en la nube
 
+[![Build Status](https://travis-ci.com/migueldgoncalves/CCproj_1819.svg?branch=master)](https://travis-ci.com/migueldgoncalves/CCproj_1819)
+
 ## Resúmen
 
 Esta aplicación se trata de mi proyecto de la asignatura de Cloud Computing: Fundamentos e Infraestructuras.
