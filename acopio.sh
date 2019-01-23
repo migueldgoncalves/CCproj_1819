@@ -61,4 +61,4 @@ az network public-ip update -g $GRUPO_NOMBRE -n $VM_VIAJES_IP_PUBLICO --dns-name
 echo "Nombre DNS $DNS_NOMBRE añadido a la máquina virtual $VM_NOMBRE"
 echo "Provisionando máquina virtual $VM_NOMBRE..."
 
-echo "ansible-playbook $PLAYBOOK_RUTA"
+ansible-playbook $PLAYBOOK_RUTA
