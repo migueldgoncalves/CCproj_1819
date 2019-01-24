@@ -37,10 +37,6 @@ MV2:
 ## Enlaces de interés relacionados con los hitos anteriores
 
 * [Arquitectura y características de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md) - Actualizado
-
-  * [Estado actual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#estado-actual) - Nuevo
-
-    * [Integración](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#integraci%C3%B3n)
     
   * [Información al Cliente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#informaci%C3%B3n-al-cliente) - Actualizado
   
@@ -64,7 +60,15 @@ MV2:
 
 * [Elección del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_eleccion.md)
 
-[Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md)
+* [Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md) - Actualizado
+
+  * [Información al Cliente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#informaci%C3%B3n-al-cliente)
+  
+  * [Gestión de Viajes](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#gesti%C3%B3n-de-viajes)
+  
+  * [Integración](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#integraci%C3%B3n)
+  
+  * [Variables de entorno](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#variables-de-entorno)
 
 [Hitos del proyecto](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/hitos.md)
 

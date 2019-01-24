@@ -52,6 +52,6 @@ Cinco variables de entorno (más 1 secundaria) deciden como funcionará la aplic
   
 * PORT_INFO y PORT_VIAJES - Los puertos de los microservicios de Información al Cliente y Gestión de Viajes, respectivamente. Si los dos microservicios se están ejecutando en máquinas distintas los puertos tendrán que ser 80; en caso contrario los puertos son de libre elección contando que no sean iguales. Sus valores por defecto son 7000 y 7001, respectivamente.
 
-* PORT - Variable apenas de interés para Heroku, es necesaria para cambiar el puerto de la aplicación al 80 al desplegársela en Heroku. He intentado cambiar el nombre de la variable en el fichero [app.json](https://github.com/migueldgoncalves/CCproj_1819/blob/master/app.json), pero sin éxito.
+* PORT - Variable apenas de interés para Heroku, es necesaria para cambiar el puerto de la aplicación al 80 al desplegársela en Heroku.
 
 * URL_INFO y URL_VIAJES - Los enlaces a los despliegues de los microservicios. Si tienen algún valor, se asume que los dos microservicios se están ejecutando en máquinas distintas. Por defecto son "http://localhost:" más el valor del puerto del microservicio respectivo.
