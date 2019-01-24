@@ -8,7 +8,7 @@ Además, Azure es un proveedor de cloud popular y fiable, con múltiples regione
 
 ## Región
 
-Para cumplir con los reglamentos de la Unión Europea sobre protección de datos, en particular el reciente Reglamento General de Protección de Datos, hay que instalar la aplicación en una máquina virtual ubicada en un centro de datos de la Unión Europea. [Esta](https://azure.microsoft.com/es-es/global-infrastructure/regions/) página indica la existencia de 8 regiones en la Unión Europea, todavía solo 5 eran aceptadas por Azure para ubicar una máquina virtual a la hora de realizar este hito, en Diciembre de 2018. Esas regiones son Centro de Francia; Oeste de Reino Unido; Sur de Reino Unido; Norte de Europa; y Europa Occidental.
+Para cumplir con los reglamentos de la Unión Europea sobre protección de datos, en particular el reciente Reglamento General de Protección de Datos, hay que instalar la aplicación en una máquina virtual ubicada en un centro de datos de la Unión Europea. [Esta](https://azure.microsoft.com/es-es/global-infrastructure/regions/) página indica la existencia de 8 regiones en la Unión Europea, todavía solo 5 eran aceptadas por Azure para ubicar una máquina virtual a la hora de realizar el hito 4, en Diciembre de 2018. Esas regiones son Centro de Francia; Oeste de Reino Unido; Sur de Reino Unido; Norte de Europa; y Europa Occidental.
 
 El siguiente paso ha sido medir la latencia y velocidad de conexión en cada una de las 5 regiones. Para eso se ha utilizado la herramienta [ApacheBench](https://httpd.apache.org/docs/2.4/programs/ab.html), una herramienta de benchmarking de servidores. La herramienta se instala con el comando `sudo apt install apache2-utils`.
 
@@ -42,7 +42,9 @@ El centro de datos ubicado en el Sur de Reino Unido contestó a los pedidos en m
 
 ## Imagen
 
-El [playbook](https://github.com/migueldgoncalves/CCproj_1819/blob/master/provision/playbook.yml) de Ansible a utilizar para provisionar la máquina virtual solo funciona en el sistema operativo Ubuntu 16.04. Ha sido probado, sin éxito, en máquinas con Ubuntu 18.04 y Debian. Así, la imágen a elegir tendría que tener ese sistema operativo.
+Como se puede ver [aquí](https://www.quora.com/What-is-the-best-server-OS) y [aquí](https://www.colocationamerica.com/blog/best-operating-systems-for-business-and-personal-use), Ubuntu Server es un sistema operativo recomendable para servidores. En la primera página se destacan sus actualizaciones frecuentes; en la segunda se destaca además su seguridad, velocidad y popularidad. Incluso en la segunda página se recomienda Ubuntu Server como una "great option" para empresas médias, que se puede considerar que es el caso de la empresa fictícia a la cual esta aplicación se destina.
+
+Sobre la versión de Ubuntu, he elegido Ubuntu Server 16.04 en vez de Ubuntu 18.04.1 una vez que el segundo ha sido lanzado hace menos de 1 año comparado con el primerio que ya cuenta con más de 2 años de patches y corrección de bugs, siendo por lo tanto más estable que Ubuntu Server 18.04.1 y más adecuado a una compañía ferroviaria cuyos servidores tienen que ser lo más estables posible. Algumas respuestas [aquí](https://www.quora.com/Which-Ubuntu-is-better-16-04-or-18-04) lo confirman.
 
 Para obtener la lista de imágenes disponibles con el sistema operativo Ubuntu 16.04, se ha utilizado el comando `az vm image list | jq '.[] | select( .offer | contains("buntu"))'`, disponible en los [apuntes de la asignatura](http://jj.github.io/CC/documentos/temas/Automatizando_cloud), sección 'CLI de Azure (versión 2.0)', al cual se ha añadido la flag `--all` para obtener todas las imágenes disponibles. El resultado fue una lista de todas las imágenes que contenían 'buntu' (podían tener 'Ubuntu' o 'ubuntu'), la cual fue enviada a un fichero `.txt`, resultando en más de 5000 líneas de texto.
 

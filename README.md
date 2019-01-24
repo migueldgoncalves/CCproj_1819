@@ -62,17 +62,27 @@ MV2:
 
 * [Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md) - Actualizado
 
-  * [Información al Cliente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#informaci%C3%B3n-al-cliente)
+  * [Información al Cliente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#informaci%C3%B3n-al-cliente) - Actualizado
   
-  * [Gestión de Viajes](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#gesti%C3%B3n-de-viajes)
+  * [Gestión de Viajes](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#gesti%C3%B3n-de-viajes) - Nuevo
   
-  * [Integración](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#integraci%C3%B3n)
+  * [Integración](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#integraci%C3%B3n) - Nuevo
   
-  * [Variables de entorno](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#variables-de-entorno)
+  * [Variables de entorno](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#variables-de-entorno) - Nuevo
 
-[Hitos del proyecto](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/hitos.md)
+* [Hitos del proyecto](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/hitos.md)
 
-[Justificación de elecciones](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md)
+* [Justificación de elecciones - Provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md) - Actualizado
+
+  * [Sistema cloud](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md#sistema-cloud)
+  
+  * [Región](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md#regi%C3%B3n)
+  
+  * [Imagen](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md#imagen) - Actualizado
+  
+  * [Tamaño de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md#tama%C3%B1o-de-la-m%C3%A1quina-virtual)
+  
+  * [Tamaño del disco de datos](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md#tama%C3%B1o-del-disco-de-datos)
 
 [Motivo de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/motivo.md)
 
