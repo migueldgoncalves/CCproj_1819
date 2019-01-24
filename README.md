@@ -36,7 +36,19 @@ MV2:
 
 ## Enlaces de interés relacionados con los hitos anteriores
 
-[Arquitectura y características de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md)
+* [Arquitectura y características de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md) - Actualizado
+
+  * [Estado actual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#estado-actual) - Nuevo
+
+    * [Integración](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#integraci%C3%B3n)
+    
+  * [Información al Cliente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#informaci%C3%B3n-al-cliente) - Actualizado
+  
+  * [Autenticación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#autenticaci%C3%B3n)
+  
+  * [Gestión de Viajes](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#gesti%C3%B3n-de-viajes) - Actualizado
+  
+  * [Gestión de Equipos](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#gesti%C3%B3n-de-equipos)
 
 [Comprobación de playbooks](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md)
 
