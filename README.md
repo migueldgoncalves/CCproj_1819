@@ -88,7 +88,7 @@ MV2:
 
 * [Playbook de Ansible](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md) - Actualizado
 
-  * [Playbook](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#playbook)
+  * [Playbook](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#playbook) - Actualizado
   
     * [Instalación del Java 8, Git y Maven](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#instalaci%C3%B3n-del-java-8-git-y-maven)
     
@@ -96,7 +96,13 @@ MV2:
     
     * [Despliegue de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#despliegue-de-la-aplicaci%C3%B3n) - Actualizado
 
-[Provisionamiento con Ansible - Creación automática de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md)
+* [Provisionamiento con Ansible - Creación automática de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md) - Actualizado
+
+  * [Preparación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md#preparaci%C3%B3n) - Actualizado
+  
+  * [Variables del script](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md#variables-del-script) - Actualizado
+  
+  * [Creación, configuración y provisionamiento de la MV, y despliegue de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md#creaci%C3%B3n-configuraci%C3%B3n-y-provisionamiento-de-la-mv-y-despliegue-de-la-aplicaci%C3%B3n) - Actualizado
 
 [Provisionamiento con Ansible - Creación manual de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md)
 
