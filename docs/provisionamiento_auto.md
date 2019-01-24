@@ -1,4 +1,4 @@
-# Configuración automática y provisionamiento de una MV, y despliegue en ella de la aplicación
+# Configuración automática y provisionamiento de dos MVs, y despliegue en ellas de la aplicación
 
 Este tutorial fue realizado en una máquina con el sistema operativo Ubuntu 16.04 LTS. Su objetivo es crear y configurar con recurso a un script dos máquinas virtuales Azure, provisionarlas y desplegar en ellas la aplicación almacenada en este repositorio. Es así una evolución del tutorial presente [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md), donde la creación y configuración de las máquinas virtuales Azure se hace de forma manual.
 
@@ -82,7 +82,7 @@ Una explicación detallada de los comandos del script se puede encontrar [aquí]
 
 `PLAYBOOK_RUTA` - La ruta para el playbook de Ansible a ejecutar. Puede ser cambiada libremente para apuntar al playbook, si no está en el directorio `/etc/ansible` o si no se llama `playbook.yml`.
 
-## Creación, configuración y provisionamiento de la MV, y despliegue de la aplicación
+## Creación, configuración y provisionamiento de las MVs, y despliegue de la aplicación
 
 Para ejecutar el script, hay que crear un fichero llamado `acopio.sh` (u otro nombre terminado en `.sh`) que esté vacío en una ubicación cualquier y copiar en él el [script de provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/acopio.sh). Hay que dar permiso de ejecución del fichero como programa, en Ubuntu 16.04 esto se hace pulsando con el botón derecho del ratón en el fichero; seleccionando Propiedades y la pestaña Permisos; y en ella la opción Permitir Ejecución de Fichero enquanto Programa. Mirar una ilustración [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Automatizacion/Script_permisos.png).
 
@@ -94,6 +94,6 @@ La aplicación estará desplegada y lista para ser accedida por un navegador al 
 
 Mirar [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Automatizacion/aplicacion.png) una captura de pantalla de la página inicial del microservicio de Información al Cliente desplegado utilizando el script.
 
-Para rearrancar las máquinas virtuales solo hay que ejecutar el script de nuevo con el mismo comando `./acopio.sh` (con el nombre reemplazado si necesario). Pasarán pocos minutos hasta que la aplicación esté corriendo de nuevo en las máquinas virtuales, lista para receber pedidos HTTP. El output final del script cuando ejecutado novamente deberá tener un aspecto similar a [este](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Automatizacion/Script_reejecucion.png), teniendo en cuenta que la imagen fue obtenida cuando el script se aplicaba a una sola máquina virtual.
+Las máquinas se detienen en el panel de Azure. Para rearrancar las máquinas virtuales solo hay que ejecutar el script de nuevo con el mismo comando `./acopio.sh` (con el nombre reemplazado si necesario). Pasarán pocos minutos hasta que la aplicación esté corriendo de nuevo en las máquinas virtuales, lista para receber pedidos HTTP. El output final del script cuando ejecutado novamente deberá tener un aspecto similar a [este](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Automatizacion/Script_reejecucion.png), teniendo en cuenta que la imagen fue obtenida cuando el script se aplicaba a una sola máquina virtual.
 
 Cuando las máquinas virtuales no sean más necesarias, eliminar todo su grupo de recursos, lo que eliminará las máquinas y recursos asociados, para no gastar crédito innecesariamente. En alternativa, si se está utilizando ese grupo de recursos para más máquinas virtuales, eliminar solo los recursos relacionados con este tutorial.

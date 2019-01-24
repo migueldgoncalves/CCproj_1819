@@ -96,15 +96,21 @@ MV2:
     
     * [Despliegue de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#despliegue-de-la-aplicaci%C3%B3n) - Actualizado
 
-* [Provisionamiento con Ansible - Creación automática de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md) - Actualizado
+* [Provisionamiento con Ansible - Creación automática de las máquinas virtuales](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md) - Actualizado
 
   * [Preparación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md#preparaci%C3%B3n) - Actualizado
   
   * [Variables del script](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md#variables-del-script) - Actualizado
   
-  * [Creación, configuración y provisionamiento de la MV, y despliegue de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md#creaci%C3%B3n-configuraci%C3%B3n-y-provisionamiento-de-la-mv-y-despliegue-de-la-aplicaci%C3%B3n) - Actualizado
+  * [Creación, configuración y provisionamiento de las MVs, y despliegue de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md#creaci%C3%B3n-configuraci%C3%B3n-y-provisionamiento-de-la-mv-y-despliegue-de-la-aplicaci%C3%B3n) - Actualizado
 
-[Provisionamiento con Ansible - Creación manual de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md)
+* [Provisionamiento con Ansible - Creación manual de las máquinas virtuales](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md) - Actualizado
+
+  * [Instalación y configuración de Ansible](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#instalaci%C3%B3n-y-configuraci%C3%B3n-de-ansible) - Actualizado
+  
+  * [Creación y configuración de las máquinas virtuales](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#creaci%C3%B3n-y-configuraci%C3%B3n-de-la-m%C3%A1quina-virtual) - Actualizado
+  
+  * [Provisionamiento de las máquinas virtuales y despliegue remoto de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#provisionamiento-de-la-m%C3%A1quina-virtual-y-despliegue-remoto-de-la-aplicaci%C3%B3n) - Actualizado
 
 [Rutas](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/rutas.md)
 
