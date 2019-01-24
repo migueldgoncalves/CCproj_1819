@@ -36,6 +36,8 @@ Al arrancar, teniendo en cuenta sus variables de entorno, el microservicio de Ge
 
 A partir de ese momento, cada viaje creado en el microservicio de Información al Cliente es comunicado al de Gestión de Viajes. Un viaje solo puede ser borrado en el microservicio de Información al Cliente si no está comprado o si fue cancelado en el microservicio de Gestión de Viajes, de otro modo el cambio no se ejecutará.
 
+Existe un fichero de prueba para la integración local, y otro para la integración remota.
+
 ## Variables de entorno
 
 Cinco variables de entorno (más 1 secundaria) deciden como funcionará la aplicación al ser desplegada:

@@ -1,8 +1,8 @@
 # Playbook de Ansible
 
-Para realizar el Hito 3 he elegido Ansible como sistema de gestión de configuración. Se trata de una herramienta más sencilla de usar que Salt, y además está cubierta tanto por parte de los apuntes de la clase como por un [seminario](https://www.meetup.com/es-ES/Granada-Geek/events/255973562/?rv=ea1_v2&_xtd=gatlbWFpbF9jbGlja9oAJDViZWU1ZjJmLWViZDAtNGMwMi05ZTI3LTkxODY0M2YwZjYzNw) de la asignatura dedicado a la herramienta.
+Para realizar el Hito 3 he elegido Ansible como sistema de gestión de configuración. Se trata de una herramienta más sencilla de usar que Salt, y además está cubierta tanto por parte de los apuntes de la clase como por un [seminario](https://www.meetup.com/es-ES/Granada-Geek/events/255973562/?rv=ea1_v2&_xtd=gatlbWFpbF9jbGlja9oAJDViZWU1ZjJmLWViZDAtNGMwMi05ZTI3LTkxODY0M2YwZjYzNw) de la asignatura dedicado a la herramienta. Los Hitos 4 y 5 utilizaron también el playbook de Ansible creado en el Hito 3.
 
-El microservicio actualmente en desarrollo, el de Información al Cliente, está basado en Java y usará una base de datos MongoDB, aunque no se haya de momento implementado dicho uso de la base de datos. De esa manera, necesitará no sólo de Git y de MongoDB, sino también de Java y Maven, este último para la gestión de las dependencias de la aplicación.
+Los dos microservicios desarrollados, el de Información al Cliente y el de Gestión de Viajes, están basados en Java y usan una base de datos MongoDB. De esa manera, necesitarán no sólo de Git y de MongoDB, sino también de Java y Maven, este último para la gestión de las dependencias de la aplicación.
 
 ## Playbook
 
@@ -54,26 +54,66 @@ El microservicio actualmente en desarrollo, el de Información al Cliente, está
      git:
       dest: Documents/CC1819
       repo: 'https://github.com/migueldgoncalves/CCproj_1819.git'
-      version: hito1-reenvio2
-
+      version: HEAD
+      
+- hosts: azureInfo
+  become: yes
+  tasks:
    - name: Install application using Maven
      environment:
-      PORT: 80
-     shell: mvn clean install
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 1
+     shell: mvn clean -Dtest=ClassInformacionTest,ServiceInformacionTest,LocalIntegracionTest install
      args:
       chdir: Documents/CC1819
 
    - name: Run application using Maven
      environment:
-      PORT: 80
-     shell: mvn exec:java -Dexec.mainClass="CC1819.Main"
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 1
+     shell: mvn exec:java -Dexec.mainClass="CC1819.init.Main"
      args:
       chdir: Documents/CC1819
+     async: 864000
+     poll: 0
+      
+- hosts: azureViajes
+  become: yes
+  tasks:
+   - name: Install application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 2
+     shell: mvn clean -Dtest=ClassViajesTest,ServiceViajesTest,LocalIntegracionTest,RemoteIntegracionTest install
+     args:
+      chdir: Documents/CC1819
+
+   - name: Run application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 2
+     shell: mvn exec:java -Dexec.mainClass="CC1819.init.Main"
+     args:
+      chdir: Documents/CC1819
+     async: 864000
+     poll: 0
 ...
 ```
-Ansible permite especificar las configuraciones y estados a obtener en las máquinas gestionadas utilizando recetas llamadas playbooks, con distintas tareas que indican a Ansible lo que hacer. Arriba se tiene el playbook `playbook.yml`, utilizado para provisionar una máquina virtual Azure con el necesario para correr esta aplicación en su estado actual más su despliegue en dicha máquina.
+Ansible permite especificar las configuraciones y estados a obtener en las máquinas gestionadas utilizando recetas llamadas playbooks, con distintas tareas que indican a Ansible lo que hacer. Arriba se tiene el playbook `playbook.yml`, utilizado para provisionar dos máquinas virtuales Azure con el necesario para correr esta aplicación en su estado actual más su despliegue en dichas máquinas.
 
-`---` y `...` delimitan el fichero .yml, el primero empiézalo y el segundo terminalo. Se sigue `- hosts: azure`, que indica que la receta se aplicará a los hosts del grupo `azure`, de acuerdo con el indicado en el fichero `hosts`. En este caso, el grupo `azure` contiene apenas la dirección DNS de la máquina virtual Azure ya creada y en ejecución. Siendo la primera instrucción del playbook, hay que empezarla con un `-`. Después, `become: yes` indica a Azure que hay que tornarse root para ejecutar las tasks. Por fim, `tasks:` delimita la lista de tareas del playbook.
+`---` y `...` delimitan el fichero .yml, el primero empiézalo y el segundo termínalo. Se sigue `- hosts: azure`, que indica que la receta se aplicará a los hosts del grupo `azure`, de acuerdo con el indicado en el fichero `hosts`. En este caso, el grupo `azure` contiene las direcciones DNS de las máquinas virtuales Azure que se crearán. Siendo la primera instrucción del playbook, hay que empezarla con un `-`. Después, `become: yes` indica a Azure que hay que tornarse root para ejecutar las tasks. Por fim, `tasks:` delimita la lista de tareas del playbook.
 
 ### Instalación del Java 8, Git y Maven
 
@@ -93,7 +133,7 @@ Ansible permite especificar las configuraciones y estados a obtener en las máqu
    name: maven
    state: present
 ```
-Las primeras tareas del playbook instalam respectivamente el Java 8 (mientras no se actualice el paquete `default-jdk`), Git y Maven. Todas las tareas Ansible son empezadas con un `-`, seguidas de su nombre.
+Las primeras tareas del playbook instalan respectivamente el Java 8 (mientras no se actualice el paquete `default-jdk`), Git y Maven. Todas las tareas Ansible son empezadas con un `-`, seguidas de su nombre.
 `apt` es un módulo Ansible para la gestión de paquetes `apt`, que en estas tareas recibe 2 parámetros: `name`, que corresponde al nombre del paquete; y `state`, dónde se indica el estado deseado del paquete. `present` es el estado por defecto, se asegura de que el paquete está instalado y una vez instalado no lo actualizará mismo que exista una versión más reciente.
 
 ### Instalación y arranque del MongoDB
@@ -136,28 +176,75 @@ La utilización de MongoDB requiere que su servicio sea iniciado previamente; la
 ### Despliegue de la aplicación
 
 ```
-- name: Clone Git project repository
-  git:
-   dest: Documents/CC1819
-   repo: 'https://github.com/migueldgoncalves/CCproj_1819.git'
-   version: hito1-reenvio2
+   - name: Clone Git project repository
+     git:
+      dest: Documents/CC1819
+      repo: 'https://github.com/migueldgoncalves/CCproj_1819.git'
+      version: HEAD
+      
+- hosts: azureInfo
+  become: yes
+  tasks:
+   - name: Install application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 1
+     shell: mvn clean -Dtest=ClassInformacionTest,ServiceInformacionTest,LocalIntegracionTest install
+     args:
+      chdir: Documents/CC1819
 
-- name: Install application using Maven
-  environment:
-   PORT: 80
-  shell: mvn clean install
-  args:
-   chdir: Documents/CC1819
+   - name: Run application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 1
+     shell: mvn exec:java -Dexec.mainClass="CC1819.init.Main"
+     args:
+      chdir: Documents/CC1819
+     async: 864000
+     poll: 0
+      
+- hosts: azureViajes
+  become: yes
+  tasks:
+   - name: Install application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 2
+     shell: mvn clean -Dtest=ClassViajesTest,ServiceViajesTest,LocalIntegracionTest,RemoteIntegracionTest install
+     args:
+      chdir: Documents/CC1819
 
-- name: Run application using Maven
-  environment:
-   PORT: 80
-  shell: mvn exec:java -Dexec.mainClass="CC1819.Main"
-  args:
-   chdir: Documents/CC1819
+   - name: Run application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 2
+     shell: mvn exec:java -Dexec.mainClass="CC1819.init.Main"
+     args:
+      chdir: Documents/CC1819
+     async: 864000
+     poll: 0
+...
 ```
 Teniendo todos los paquetes necesarios instalados, ya se puede desplegar la aplicación. En la primera tarea, el módulo `git` permite hacer clone del repositorio indicado en `repo` para el directorio indicado en `dest`. `version` es un parámetro opcional, y indica la versión del repositorio a descargar.
 
-La segunda tarea instala la aplicación utilizando la herramienta de gestión de dependencias Maven. Por defecto la aplicación se ejecutará en el puerto 7000; esto se cambia creando una variable de entorno con el puerto deseado, en este caso el 80, lo que se hace con la palabra-llave `environment`, seguida del nombre de la variable `PORT` y de su valor `80`. En seguida se instala la aplicación con el comando `mvn clean install`, que es pasado por una shell `/bin/sh` usando el parámetro `shell`. `chdir: Documents/CC1819` indica que hay que cambiar al directorio `Documents/CC1819`, donde hemos clonado el repositorio de la aplicación, antes de ejecutar el comando. Aunque la ejecución de la aplicación solo se realice en la última tarea, y que `environment` solo cambie variables de entorno dentro de una única tarea, es necesario crear la variable de entorno `PORT` también en la instalación de la aplicación para que los tests de la misma se ejecuten sobre el puerto 80 y no el 7000 por defecto.
+Las dos últimas tareas tienen que ser realizadas de forma individual en cada una de las máquinas, no solo para que la variable de entorno `SERVICIO` sea distinta en cada una sino también para que solo se ejecuten los tests adecuados a cada microservicio. El grupo `azureInfo` contiene el enlace al despliegue del microservicio de Información al Cliente cuando terminado, y el grupo `azureViajes` contiene el enlace al despliegue del microservicio de Gestión de Viajes cuando terminado.
 
-Por fin, la tercera tarea ejecuta la aplicación. De nuevo se crea la variable de entorno `PORT` con el valor `80`, y de novo el comando indicado en `shell` se ejecuta en el directorio `Documents/CC1819`. `mvn exec:java` ejecuta la aplicación utilizando Java; `-Dexec.mainClass="CC1819.Main` indica que el método main() de la aplicación se encuentra en el fichero `CC1819.Main`.
+Más información sobre las variables de entorno utilizadas [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#variables-de-entorno).
+
+La segunda y cuarta tareas instalan el microservicio respectivo utilizando la herramienta de gestión de dependencias Maven. Hay que asignar valores a las 5 variables de entorno que comandan la aplicación; esto se hace con la palabra-llave `environment`, seguida del nombre de la variable y de su valor. En seguida se instala la aplicación con el comando `mvn clean install`, que es pasado por una shell `/bin/sh` usando el parámetro `shell`. La flag `-Dtest` permite indicar que tests se quieren ejecutar. `chdir: Documents/CC1819` indica que hay que cambiar al directorio `Documents/CC1819`, donde hemos clonado el repositorio de la aplicación, antes de ejecutar el comando.
+
+Aunque la ejecución de la aplicación solo se realice en la tarea siguiente, una vez que `environment` solo cambia variables de entorno dentro de una única tarea es necesario crear todas las variables de entorno también en la instalación de la aplicación para que los tests de la misma funcionen de forma correcta.
+
+Por fin, la tercera y quinta tareas ejecutan la aplicación. De nuevo se crean las 5 variables de entorno, y de nuevo el comando indicado en `shell` se ejecuta en el directorio `Documents/CC1819`. `mvn exec:java` ejecuta la aplicación utilizando Java; `-Dexec.mainClass="CC1819.init.Main` indica que el método main() de la aplicación se encuentra en el fichero `CC1819.init.Main`.

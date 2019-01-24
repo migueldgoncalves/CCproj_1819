@@ -42,7 +42,7 @@ MV2:
   
   * [Variables de entorno](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#variables-de-entorno)
   
-  * [Motivo de la infraestructura desplegada]()
+  * [Motivo de la infraestructura desplegada](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#motivo-de-la-infraestructura-desplegada)
   
 * [Justificación de elecciones - Provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md)
 
@@ -84,9 +84,17 @@ MV2:
 
 * [Hitos del proyecto](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/hitos.md)
 
-[Motivo de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/motivo.md)
+* [Motivo de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/motivo.md)
 
-[Playbook de Ansible](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md)
+* [Playbook de Ansible](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md) - Actualizado
+
+  * [Playbook](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#playbook)
+  
+    * [Instalación del Java 8, Git y Maven](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#instalaci%C3%B3n-del-java-8-git-y-maven)
+    
+    * [Instalación y arranque del MongoDB](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#instalaci%C3%B3n-y-arranque-del-mongodb)
+    
+    * [Despliegue de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/playbook.md#despliegue-de-la-aplicaci%C3%B3n) - Actualizado
 
 [Provisionamiento con Ansible - Creación automática de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_auto.md)
 
