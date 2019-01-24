@@ -67,6 +67,20 @@ MV2:
   * [Tamaño de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md#tama%C3%B1o-de-la-m%C3%A1quina-virtual)
   
   * [Tamaño del disco de datos](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/justificacion_hito4.md#tama%C3%B1o-del-disco-de-datos)
+  
+* [Justificación del Vagrantfile](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md)
+
+  * [Vagrantfile](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#vagrantfile)
+  
+  * [Justificación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#justificaci%C3%B3n)
+  
+    * [Configuración común](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#configuraci%C3%B3n-com%C3%BAn)
+    
+    * [Configuración específica de la MV del microservicio de Información al Cliente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#configuraci%C3%B3n-espec%C3%ADfica-de-la-mv-del-microservicio-de-informaci%C3%B3n-al-cliente)
+    
+    * [Configuración específica de la MV del microservicio de Gestión de Viajes](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#configuraci%C3%B3n-espec%C3%ADfica-de-la-mv-del-microservicio-de-gesti%C3%B3n-de-viajes)
+    
+  * [Tutoriales y ayudas](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#tutoriales-y-ayudas)
 
 ## Enlaces de interés relacionados con los hitos anteriores
 
