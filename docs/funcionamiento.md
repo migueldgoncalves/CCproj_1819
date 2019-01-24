@@ -55,3 +55,11 @@ Cinco variables de entorno (más 1 secundaria) deciden como funcionará la aplic
 * PORT - Variable apenas de interés para Heroku, es necesaria para cambiar el puerto de la aplicación al 80 al desplegársela en Heroku.
 
 * URL_INFO y URL_VIAJES - Los enlaces a los despliegues de los microservicios. Si tienen algún valor, se asume que los dos microservicios se están ejecutando en máquinas distintas. Por defecto son "http://localhost:" más el valor del puerto del microservicio respectivo.
+
+## Motivo de la infraestructura desplegada
+
+Después del [Hito 2](https://github.com/migueldgoncalves/CCproj_1819/milestone/8) y hasta el [Hito 4](https://github.com/migueldgoncalves/CCproj_1819/milestone/4), mi aplicación solo tenía un microservicio, sin base de datos aunque el [playbook de Ansible](https://github.com/migueldgoncalves/CCproj_1819/blob/master/provision/playbook.yml) ya incluía su instalación en la máquina virtual.
+
+En el [hito 5](https://github.com/migueldgoncalves/CCproj_1819/milestone/5), el profesor nos ha dicho que con una sola máquina virtual no se hacía orquestación, y nos ha incentivado a que creáramos otra más. Lo decidí hacer, junto con la instalación de la base de datos MongoDB que ya tenía pendiente hace mucho.
+
+Por tratarse de un microservicio muy conectado al microservicio de Información al Cliente ya implementado de acuerdo con la [arquitectura](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md) del proyecto, he decidido implementar el microservicio de Gestión de Viajes.
