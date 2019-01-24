@@ -1,4 +1,4 @@
-# Configuración del despliegue
+# Configuración del despliegue - Heroku
 
 Es posible desplegar automáticamente haciendo push aplicaciones en repositorios Git a Heroku, mediante el uso de un servicio de integración continua. En esta práctica ese servicio es [Codeship](https://codeship.com/), que permite integración y despliegue continuos de forma gratuita con recursos limitados.
 

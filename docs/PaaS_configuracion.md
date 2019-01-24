@@ -1,4 +1,4 @@
-## Configuración
+## Configuración del PaaS - Heroku
 
 Heroku, el PaaS elegido para el hito 2 del proyecto, necesita 2 ficheros de configuración para el despliegue del código que esté en un repositorio GitHub, el app.json y el Procfile.
 

@@ -56,13 +56,13 @@ MV2:
   
   * [Comprobación de mi playbook](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md#comprobaci%C3%B3n-de-mi-playbook)
 
-[Configuración del despliegue](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/despliegue_PaaS.md)
+* [Configuración del despliegue - Heroku](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/despliegue_PaaS.md)
 
-[Configuración del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_configuracion.md)
+* [Configuración del PaaS - Heroku](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_configuracion.md)
 
-[Creación de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/creacion_aplicacion.md)
+* [Creación de la aplicación - Microservicio básico](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/creacion_aplicacion.md)
 
-[Elección del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_eleccion.md)
+* [Elección del PaaS](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/PaaS_eleccion.md)
 
 [Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md)
 
