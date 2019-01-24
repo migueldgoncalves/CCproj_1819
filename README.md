@@ -22,13 +22,13 @@ Está distribuido con la licencia MIT.
 
 Despliegue https://javalinapp.herokuapp.com/
 
-MV: 
+MV: 51.140.153.142
 
-MV2: 
+MV2: 51.140.5.97
 
 ### Estado actual
 
-
+Al terminar el Hito 5, se tienen listos los microservicios de Información al Cliente y de Gestión de Viajes, cada uno con una base de datos MongoDB; los dos microservicios comunican entre si vía HTTP.
 
 ## Enlaces de interés relacionados con el hito actual
 
@@ -73,6 +73,16 @@ MV2:
   * [Vagrantfile](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#vagrantfile)
   
   * [Justificación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#justificaci%C3%B3n)
+  
+* [Utilización del Vagrantfile](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrantfile_funcionamiento.md)
+
+  * [Requisitos](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrantfile_funcionamiento.md#requisitos)
+  
+  * [Creación y provisionamiento de las máquinas virtuales](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrantfile_funcionamiento.md#creaci%C3%B3n-y-provisionamiento-de-las-m%C3%A1quinas-virtuales)
+  
+  * [Comprobación del funcionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrantfile_funcionamiento.md#comprobaci%C3%B3n-del-funcionamiento)
+  
+  * [Fuentes](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrantfile_funcionamiento.md#fuentes)
   
     * [Configuración común](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrant_justificacion.md#configuraci%C3%B3n-com%C3%BAn)
     

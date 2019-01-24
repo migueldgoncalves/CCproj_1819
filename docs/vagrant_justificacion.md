@@ -87,6 +87,8 @@ El contenido del bloque `viajes` empieza por ser también un bloque de configura
 
 En ese bloque, con `playbook` se indica el path del playbook a utilizar. Ese [playboook](https://github.com/migueldgoncalves/CCproj_1819/blob/master/orquestacion/playbook.yml) es una copia exacta del [ubicado](https://github.com/migueldgoncalves/CCproj_1819/blob/master/provision/playbook.yml) en `/provision` y está ubicado también en la carpeta `orquestation`, tal como el Vagrantfile.
 
+Como indicado [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/vagrantfile_funcionamiento.md), se espera que esta máquina virtual sea la última a arrancarse, por lo que tiene sentido que el playbook se ejecute después de su creación.
+
 En Vagrant se puede indicar un fichero de hosts de Ansible o dejar que Vagrant cree uno automáticamente; aquí he optado por suministrar el [fichero de hosts](https://github.com/migueldgoncalves/CCproj_1819/blob/master/orquestacion/hosts), que se encuentra en el mismo directorio del Vagrantfile y tiene exactamente los hosts a añadir para ejecutar el playbook de Ansible manualmente, como se puede ver [aquí](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#instalaci%C3%B3n-y-configuraci%C3%B3n-de-ansible).
 
 Vagrant por defecto provisiona solamente la máquina `default` mismo que el playbook de Ansible tenga otros grupos; ese comportamiento se puede detener con la línea `ansible.limit="all"` para que todas las máquinas en los grupos del playbook de Ansible sean provisionadas.
