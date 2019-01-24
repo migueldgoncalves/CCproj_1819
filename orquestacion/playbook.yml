@@ -1,0 +1,103 @@
+---
+- hosts: azure
+  become: yes
+  tasks:
+   - name: Install Java 8
+     apt:
+      name: default-jdk
+      state: present
+
+   - name: Install Git
+     apt:
+      name: git
+      state: present
+
+   - name: Install Maven
+     apt:
+      name: maven
+      state: present
+
+   - name: Add MongoDB public GPG key
+     apt_key:
+      keyserver: hkp://keyserver.ubuntu.com:80
+      id: 9DA31620334BD75D9DCB49F368818C72E52529D4
+      state: present
+
+   - name: Add MongoDB repository
+     lineinfile:
+      line: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse"
+      dest: /etc/apt/sources.list.d/mongodb-org-4.0.list
+      state: present
+      create: yes
+
+   - name: Install MongoDB
+     apt:
+      name: mongodb-org
+      state: present
+      update_cache: yes
+
+   - name: Start MongoDB service
+     service:
+      name: mongod
+      state: started
+
+   - name: Clone Git project repository
+     git:
+      dest: Documents/CC1819
+      repo: 'https://github.com/migueldgoncalves/CCproj_1819.git'
+      version: HEAD
+      
+- hosts: azureInfo
+  become: yes
+  tasks:
+   - name: Install application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 1
+     shell: mvn clean -Dtest=ClassInformacionTest,ServiceInformacionTest,LocalIntegracionTest install
+     args:
+      chdir: Documents/CC1819
+
+   - name: Run application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 1
+     shell: mvn exec:java -Dexec.mainClass="CC1819.init.Main"
+     args:
+      chdir: Documents/CC1819
+     async: 864000
+     poll: 0
+      
+- hosts: azureViajes
+  become: yes
+  tasks:
+   - name: Install application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 2
+     shell: mvn clean -Dtest=ClassViajesTest,ServiceViajesTest,LocalIntegracionTest,RemoteIntegracionTest install
+     args:
+      chdir: Documents/CC1819
+
+   - name: Run application using Maven
+     environment:
+      PORT_INFO: 80
+      PORT_VIAJES: 80
+      URL_INFO: 'http://ccazureinfo.uksouth.cloudapp.azure.com'
+      URL_VIAJES: 'http://ccazureviajes.uksouth.cloudapp.azure.com'
+      SERVICIO: 2
+     shell: mvn exec:java -Dexec.mainClass="CC1819.init.Main"
+     args:
+      chdir: Documents/CC1819
+     async: 864000
+     poll: 0
+...

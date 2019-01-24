@@ -1,17 +1,21 @@
 Vagrant.configure('2') do |config|
+
   config.vm.box = 'unaboxdummy'
-  config.ssh.private_key_path = '~/.ssh/id_rsa'
+  config.ssh.private_key_path = '~/.ssh/id_rsa_azure'
+  
   config.vm.provider :azure do |azure, override|
     azure.tenant_id = ENV['AZURE_TENANT_ID']
     azure.client_id = ENV['AZURE_CLIENT_ID']
     azure.client_secret = ENV['AZURE_CLIENT_SECRET']
     azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+    
     azure.resource_group_name = "CCGroup"
     azure.location = "uksouth"
     azure.vm_size = "Standard_B1s"
     azure.vm_image_urn = "Canonical:UbuntuServer:16.04-LTS:16.04.201812070"
     azure.tcp_endpoints = [22, 80]
   end
+  
   config.vm.define "info" do |info|
     config.vm.provider :azure do |azureinfo, override|
       azureinfo.vm_name = "info"
@@ -24,6 +28,7 @@ Vagrant.configure('2') do |config|
       ]
     end
   end
+  
   config.vm.define "viajes" do |viajes|
     config.vm.provider :azure do |azureviajes, override|
       azureviajes.vm_name = "viajes"
@@ -35,9 +40,10 @@ Vagrant.configure('2') do |config|
          }
       ]
     end
+    
     config.vm.provision "ansible" do |ansible|
       ansible.playbook = "playbook.yml"
-      ansible.inventory_path = "/etc/ansible/hosts"
+      ansible.inventory_path = "hosts"
       ansible.limit = "all"
     end
   end
