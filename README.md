@@ -50,7 +50,11 @@ MV2:
   
   * [Gestión de Equipos](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/arquitectura.md#gesti%C3%B3n-de-equipos)
 
-[Comprobación de playbooks](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md)
+* [Comprobación de playbooks de Ansible - 1 máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md)
+
+  * [Comprobación de otros playbooks](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md#comprobaci%C3%B3n-de-otros-playbooks)
+  
+  * [Comprobación de mi playbook](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md#comprobaci%C3%B3n-de-mi-playbook)
 
 [Configuración del despliegue](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/despliegue_PaaS.md)
 

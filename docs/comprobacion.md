@@ -1,4 +1,4 @@
-# Comprobación
+# Comprobación de playbooks de Ansible - 1 máquina virtual
 
 En el Hito 3, una de las tareas que se pedía era comprobar el correcto funcionamiento del playbook de otro compañero de clase en una máquina virtual própria, y en cambio tener el playbook de uno comprobado por otro compañero.
 
