@@ -32,9 +32,17 @@ MV2:
 
 ## Enlaces de interés relacionados con el hito actual
 
-* [Comprobación de mi Vagrantfile - Por Andrea Morales Garzón (@andreamorgar)](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_AndreaMorales.md)
+* [Comprobación de mi orquestación - Por Andrea Morales Garzón (@andreamorgar)](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_AndreaMorales.md)
 
   * [Procedimiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_AndreaMorales.md#prueba-de-orquestaci%C3%B3n-de-m%C3%A1quinas-virtuales)
+  
+* [Comprobación de la orquestación de @andreamorgar](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves.md)
+
+  * [Creación de máquinas virtuales y su provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves.md#creaci%C3%B3n-de-m%C3%A1quinas-virtuales-y-su-provisionamiento)
+  
+  * [Funcionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves.md#funcionamiento)
+  
+  * [Comentario](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves.md#comentario)
 
 * [Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md)
 

@@ -4,7 +4,7 @@ El documento de la comprobación por parte de @andreamorgar de mi orquestación 
 
 ## Creación de máquinas virtuales y su provisionamiento
 
-Primeramente, he accedido al repositorio de Andrea en [este](https://github.com/andreamorgar/ProyectoCC) enlace y hice clone del mismo en mi Desktop. Enseguida accedí a la documentación de su orquestación presente en [este](https://github.com/andreamorgar/ProyectoCC/blob/master/docs/orquestacion_mv.md) enlace, donde están las instrucciones para crear y provisionar dos máquinas virtuales con el proyecto de Andrea.
+Primeramente, he accedido al repositorio de Andrea en [este](https://github.com/andreamorgar/ProyectoCC) enlace e hice clone del mismo en mi Desktop. Enseguida accedí a la documentación de su orquestación presente en [este](https://github.com/andreamorgar/ProyectoCC/blob/master/docs/orquestacion_mv.md) enlace, donde están las instrucciones para crear y provisionar dos máquinas virtuales con el proyecto de Andrea.
 
 Una de las máquinas, `maquinaservicios`, contendrá su servicio principal. Será la primera máquina a ser arrancada y provisionada. La segunda máquina, `maquinamongodb`, contendrá la base de datos MongoDB de dicho servicio, y se creará y provisionará solo cuando la primera máquina esté totalmente funcional.
 
