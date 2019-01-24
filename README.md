@@ -108,10 +108,14 @@ MV2:
 
   * [Instalación y configuración de Ansible](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#instalaci%C3%B3n-y-configuraci%C3%B3n-de-ansible) - Actualizado
   
-  * [Creación y configuración de las máquinas virtuales](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#creaci%C3%B3n-y-configuraci%C3%B3n-de-la-m%C3%A1quina-virtual) - Actualizado
+  * [Creación y configuración de las máquinas virtuales](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#creaci%C3%B3n-y-configuraci%C3%B3n-de-las-m%C3%A1quinas-virtuales) - Actualizado
   
-  * [Provisionamiento de las máquinas virtuales y despliegue remoto de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#provisionamiento-de-la-m%C3%A1quina-virtual-y-despliegue-remoto-de-la-aplicaci%C3%B3n) - Actualizado
+  * [Provisionamiento de las máquinas virtuales y despliegue remoto de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento_manual.md#provisionamiento-de-las-m%C3%A1quinas-virtuales-y-despliegue-remoto-de-la-aplicaci%C3%B3n) - Actualizado
 
-[Rutas](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/rutas.md)
+* [Rutas](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/rutas.md) - Actualizado
 
-[Script de provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/script_azure_cli.md)
+* [Script de provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/script_azure_cli.md) - Actualizado
+
+  * [Contenido del script](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/script_azure_cli.md#contenido-del-script) - Actualizado
+  
+  * [Explicación del script](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/script_azure_cli.md#explicaci%C3%B3n-del-script) - Actualizado
