@@ -44,6 +44,12 @@ Al terminar el Hito 5, se tienen listos los microservicios de Información al Cl
   
   * [Comentario](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves.md#comentario)
 
+* [Comprobación de la orquestación de @danielbc09](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md)
+
+  * [Creación de máquinas virtuales y su provisionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md#creaci%C3%B3n-de-m%C3%A1quinas-virtuales-y-su-provisionamiento)
+
+  * [Ejecución del servicio](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md#ejecuci%C3%B3n-del-servicio)
+
 * [Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md)
 
   * [Información al Cliente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#informaci%C3%B3n-al-cliente)
