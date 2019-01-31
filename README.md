@@ -50,6 +50,14 @@ Al terminar el Hito 5, se tienen listos los microservicios de Información al Cl
 
   * [Ejecución del servicio](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md#ejecuci%C3%B3n-del-servicio)
 
+* [Comprobación de la orquestación de @jabonillab](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_3.md)
+
+  * [Creación y provisionamiento de la máquina virtual](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_3.md#creaci%C3%B3n-y-provisionamiento-de-la-m%C3%A1quina-virtual)
+
+  * [Arranque del microservicio](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_3.md#arranque-del-microservicio)
+
+  * [Funcionamiento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_3.md#funcionamiento)
+
 * [Funcionamiento de la aplicación](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md)
 
   * [Información al Cliente](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/funcionamiento.md#informaci%C3%B3n-al-cliente)
